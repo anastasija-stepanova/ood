@@ -1,23 +1,23 @@
 <?php
 
-function MuteQuackBehavior() : callable
+function muteQuackBehavior(): callable
 {
-    return function () : void
+    return function (): void
     {
     };
 }
 
-function QuackBehavior() : callable
+function quackBehavior(): callable
 {
-    return function () : void
+    return function (): void
     {
         echo "Quack Quack\n";
     };
 }
 
-function SqueakBehavior() : callable
+function squeakBehavior(): callable
 {
-    return function () : void
+    return function (): void
     {
         echo "Squeek\n";
     };

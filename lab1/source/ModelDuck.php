@@ -7,7 +7,7 @@ class ModelDuck extends Duck
         parent::__construct(new FlyNoWay(), new MuteQuackBehavior(), new NoDance());
     }
 
-    public function Display(): void
+    public function display(): void
     {
         echo "I'm model duck\n";
     }

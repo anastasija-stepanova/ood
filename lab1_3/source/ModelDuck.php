@@ -4,10 +4,10 @@ class ModelDuck extends Duck
 {
     public function __construct()
     {
-        parent::__construct(FlyNoWay(),MuteQuackBehavior(), NoDanceBehavior());
+        parent::__construct(flyNoWay(), muteQuackBehavior(), noDanceBehavior());
     }
 
-    public function Display(): void
+    public function display(): void
     {
         echo "I'm model duck\n";
     }

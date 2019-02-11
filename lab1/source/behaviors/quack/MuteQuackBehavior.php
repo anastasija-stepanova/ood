@@ -2,7 +2,7 @@
 
 class MuteQuackBehavior implements IQuackBehavior
 {
-    public function Quack(): void
+    public function quack(): void
     {
     }
 }

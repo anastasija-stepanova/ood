@@ -1,24 +1,24 @@
 <?php
 
-function NoDanceBehavior() : callable
+function noDanceBehavior(): callable
 {
-    return function () : void
+    return function (): void
     {
         echo "I can not dance\n";
     };
 }
 
-function DanceWaltz() : callable
+function danceWaltz(): callable
 {
-    return function () : void
+    return function (): void
     {
         echo "I'm dancing a waltz\n";
     };
 }
 
-function DanceMinuet() : callable
+function danceMinuet(): callable
 {
-    return function () : void
+    return function (): void
     {
         echo "I'm dancing a minuet\n";
     };

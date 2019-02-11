@@ -2,7 +2,7 @@
 
 class DanceWaltz implements IDanceBehavior
 {
-    public function Dance(): void
+    public function dance(): void
     {
         echo "I'm dancing a waltz\n";
     }

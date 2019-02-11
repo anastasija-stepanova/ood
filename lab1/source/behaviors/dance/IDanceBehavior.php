@@ -2,5 +2,5 @@
 
 interface IDanceBehavior
 {
-    public function Dance(): void;
+    public function dance(): void;
 }

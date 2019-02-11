@@ -4,10 +4,10 @@ class MillardDuck extends Duck
 {
     public function __construct()
     {
-        parent::__construct(FlyWithWings(), QuackBehavior(), DanceWaltz());
+        parent::__construct(flyWithWings(), quackBehavior(), danceWaltz());
     }
 
-    public function Display(): void
+    public function display(): void
     {
         echo "I'm mallard duck\n";
     }

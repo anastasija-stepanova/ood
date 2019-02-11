@@ -6,50 +6,50 @@ abstract class Duck
     private $quackBehavior;
     private $danceBehavior;
 
-    public function __construct(callable &$flyBehavior, callable &$quackBehavior, callable &$danceBehavior)
+    public function __construct(callable $flyBehavior, callable $quackBehavior, callable $danceBehavior)
     {
-        $this->SetFlyBehavior($flyBehavior);
-        $this->SetQuackBehavior($quackBehavior);
-        $this->SetDanceBehavior($danceBehavior);
+        $this->setFlyBehavior($flyBehavior);
+        $this->setQuackBehavior($quackBehavior);
+        $this->setDanceBehavior($danceBehavior);
     }
 
-    public function Swim(): void
+    public function swim(): void
     {
         echo "I'm swimming\n";
     }
 
-    public function Dance(): void
+    public function dance(): void
     {
         call_user_func($this->danceBehavior);
     }
 
-    public function Quack(): void
+    public function quack(): void
     {
         call_user_func($this->quackBehavior);
     }
 
-    public function Fly(): void
+    public function fly(): void
     {
         call_user_func($this->flyBehavior);
     }
 
-    public function SetFlyBehavior(callable &$flyBehavior): void
+    public function setFlyBehavior(callable &$flyBehavior): void
     {
         assert($flyBehavior);
         $this->flyBehavior = $flyBehavior;
     }
 
-    public function SetQuackBehavior(callable &$quackBehavior): void
+    public function setQuackBehavior(callable &$quackBehavior): void
     {
         assert($quackBehavior);
         $this->quackBehavior = $quackBehavior;
     }
 
-    public function SetDanceBehavior(callable &$danceBehavior): void
+    public function setDanceBehavior(callable &$danceBehavior): void
     {
         assert($danceBehavior);
         $this->danceBehavior = $danceBehavior;
     }
 
-    abstract public function Display(): void;
+    abstract public function display(): void;
 }

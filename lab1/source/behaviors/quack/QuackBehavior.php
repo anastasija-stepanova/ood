@@ -2,7 +2,7 @@
 
 class QuackBehavior implements IQuackBehavior
 {
-    public function Quack(): void
+    public function quack(): void
     {
         echo "Quack Quack\n";
     }

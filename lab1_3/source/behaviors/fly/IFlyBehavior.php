@@ -1,15 +1,17 @@
 <?php
 
-function FlyNoWay() : callable
+function flyNoWay(): callable
 {
-    return function () : void
+    return function (): void
     {
 
     };
 }
-function FlyWithWings() : callable
+
+function flyWithWings(): callable
 {
     $flightsCount = 0;
+
     return function () use (&$flightsCount): void
     {
         ++$flightsCount;

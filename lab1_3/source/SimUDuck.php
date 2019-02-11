@@ -2,40 +2,40 @@
 
 class SimUDuck
 {
-    public function Main(): void
+    public function main(): void
     {
         $mallardDuck = new MillardDuck();
-        $this->PlayWithDuck($mallardDuck);
+        $this->playWithDuck($mallardDuck);
 
         $redheadDuck = new RedheadDuck();
-        $this->PlayWithDuck($redheadDuck);
+        $this->playWithDuck($redheadDuck);
 
         $rubberDuck = new RubberDuck();
-        $this->PlayWithDuck($rubberDuck);
+        $this->playWithDuck($rubberDuck);
 
         $decoyDuck = new DecoyDuck();
-        $this->PlayWithDuck($decoyDuck);
+        $this->playWithDuck($decoyDuck);
 
         $modelDuck = new ModelDuck();
-        $this->PlayWithDuck($modelDuck);
-        $modelDuck->SetFlyBehavior(FlyWithWings());
-        $this->PlayWithDuck($modelDuck);
+        $this->playWithDuck($modelDuck);
+        $modelDuck->setFlyBehavior(flyWithWings());
+        $this->playWithDuck($modelDuck);
     }
 
-    private function DrawDuck(Duck &$duck): void
+    private function drawDuck(Duck &$duck): void
     {
-        $duck->Display();
+        $duck->display();
     }
 
-    private function PlayWithDuck(Duck &$duck): void
+    private function playWithDuck(Duck &$duck): void
     {
-        $this->DrawDuck($duck);
-        $duck->Quack();
-        $duck->Fly();
-        $duck->Fly();
-        $duck->Fly();
-        $duck->Fly();
-        $duck->Dance();
+        $this->drawDuck($duck);
+        $duck->quack();
+        $duck->fly();
+        $duck->fly();
+        $duck->fly();
+        $duck->fly();
+        $duck->dance();
         echo "\n";
     }
 }

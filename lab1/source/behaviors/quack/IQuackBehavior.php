@@ -2,5 +2,5 @@
 
 interface IQuackBehavior
 {
-    public function Quack(): void;
+    public function quack(): void;
 }

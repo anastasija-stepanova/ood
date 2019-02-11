@@ -7,7 +7,7 @@ class RubberDuck extends Duck
         parent::__construct(new FlyNoWay(), new SqueakBehavior(), new NoDance());
     }
 
-    public function Display(): void
+    public function display(): void
     {
         echo "I'm rubber duck\n";
     }

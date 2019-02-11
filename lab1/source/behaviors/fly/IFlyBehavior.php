@@ -2,5 +2,5 @@
 
 interface IFlyBehavior
 {
-    public function Fly(): void;
+    public function fly(): void;
 }

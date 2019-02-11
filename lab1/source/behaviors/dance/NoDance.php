@@ -2,7 +2,7 @@
 
 class NoDance implements IDanceBehavior
 {
-    public function Dance(): void
+    public function dance(): void
     {
         echo "I can not dance\n";
     }

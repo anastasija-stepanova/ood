@@ -2,7 +2,7 @@
 
 class SqueakBehavior implements IQuackBehavior
 {
-    public function Quack(): void
+    public function quack(): void
     {
         echo "Squeek\n";
     }

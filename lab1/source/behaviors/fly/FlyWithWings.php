@@ -4,7 +4,7 @@ class FlyWithWings implements IFlyBehavior
 {
     private $flightsCount = 0;
 
-    public function Fly(): void
+    public function fly(): void
     {
         $this->flightsCount++;
         echo "I'm flying with wings\n";

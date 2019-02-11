@@ -4,10 +4,10 @@ class RubberDuck extends Duck
 {
     public function __construct()
     {
-        parent::__construct(FlyNoWay(),SqueakBehavior(), NoDanceBehavior());
+        parent::__construct(flyNoWay(), squeakBehavior(), noDanceBehavior());
     }
 
-    public function Display(): void
+    public function display(): void
     {
         echo "I'm rubber duck\n";
     }

@@ -2,54 +2,57 @@
 
 abstract class Duck
 {
-    private $m_flyBehavior;
-    private $m_quackBehavior;
-    private $m_danceBehavior;
+    private $flyBehavior;
+    private $quackBehavior;
+    private $danceBehavior;
 
-    public function __construct(IFlyBehavior &$flyBehavior, IQuackBehavior &$quackBehavior, IDanceBehavior &$danceBehavior)
-    {
-        $this->SetFlyBehavior($flyBehavior);
-        $this->SetQuackBehavior($quackBehavior);
-        $this->SetDanceBehavior($danceBehavior);
+    public function __construct(
+        IFlyBehavior $flyBehavior,
+        IQuackBehavior $quackBehavior,
+        IDanceBehavior $danceBehavior
+    ) {
+        $this->setFlyBehavior($flyBehavior);
+        $this->setQuackBehavior($quackBehavior);
+        $this->setDanceBehavior($danceBehavior);
     }
 
-    public function Swim(): void
+    public function swim(): void
     {
         echo "I'm swimming\n";
     }
 
-    public function Dance(): void
+    final public function dance(): void
     {
-        $this->m_danceBehavior->Dance();
+        $this->danceBehavior->dance();
     }
 
-    public function Quack(): void
+    final public function quack(): void
     {
-        $this->m_quackBehavior->Quack();
+        $this->quackBehavior->quack();
     }
 
-    public function Fly(): void
+    final public function fly(): void
     {
-        $this->m_flyBehavior->Fly();
+        $this->flyBehavior->fly();
     }
 
-    public function SetFlyBehavior(IFlyBehavior &$flyBehavior): void
+    public function setFlyBehavior(IFlyBehavior &$flyBehavior): void
     {
         assert($flyBehavior);
-        $this->m_flyBehavior = $flyBehavior;
+        $this->flyBehavior = $flyBehavior;
     }
 
-    public function SetQuackBehavior(IQuackBehavior &$quackBehavior): void
+    public function setQuackBehavior(IQuackBehavior &$quackBehavior): void
     {
         assert($quackBehavior);
-        $this->m_quackBehavior = $quackBehavior;
+        $this->quackBehavior = $quackBehavior;
     }
 
-    public function SetDanceBehavior(IDanceBehavior &$danceBehavior): void
+    public function setDanceBehavior(IDanceBehavior &$danceBehavior): void
     {
         assert($danceBehavior);
-        $this->m_danceBehavior = $danceBehavior;
+        $this->danceBehavior = $danceBehavior;
     }
 
-    abstract public function Display(): void;
+    abstract public function display(): void;
 }
