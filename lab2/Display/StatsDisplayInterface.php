@@ -1,6 +1,6 @@
 <?php
 
-class CStatsDisplay implements IObserver
+class StatsDisplay implements ObserverInterface
 {
     private $statTemp;
     private $statHumidity;
@@ -13,7 +13,7 @@ class CStatsDisplay implements IObserver
         $this->statPressure = new IndicatorCalculator();
     }
 
-    public function update(SWeatherInfo $data): void
+    public function update(WeatherInfo $data): void
     {
         echo "Temperature info:\n";
         $this->statTemp->updateIndicator($data->temperature);

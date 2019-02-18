@@ -1,6 +1,6 @@
 <?php
 
-class WeatherStation extends CObservable
+class WeatherStation extends Observable
 {
     /** @var float */
     private $temperature = 0.0;
@@ -38,9 +38,9 @@ class WeatherStation extends CObservable
         $this->measurementsChanged();
     }
 
-    protected function getChangedData(): SWeatherInfo
+    protected function getChangedData(): WeatherInfo
     {
-        $info = new SWeatherInfo();
+        $info = new WeatherInfo();
         $info->temperature = $this->getTemperature();
         $info->humidity = $this->getHumidity();
         $info->pressure = $this->getPressure();

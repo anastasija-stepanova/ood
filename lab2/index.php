@@ -1,22 +1,22 @@
 <?php
 
-require_once ('Observer/IObserver.php');
-require_once ('Observable/IObservable.php');
-require_once ('Observable/CObservable.php');
-require_once ('WeatherUtils/SWeatherInfo.php');
+require_once('Observer/ObserverInterface.php');
+require_once('Observable/ObservableInterface.php');
+require_once('Observable/Observable.php');
+require_once('WeatherUtils/WeatherInfo.php');
 require_once ('WeatherUtils/WeatherStation.php');
-require_once ('Display/CDisplay.php');
-require_once ('Display/CStatsDisplay.php');
+require_once('Display/DisplayInterface.php');
+require_once('Display/StatsDisplayInterface.php');
 require_once ('Display/IndicatorCalculator.php');
 
 function main()
 {
     $ws = new WeatherStation();
 
-    $display = new CDisplay();
+    $display = new Display();
     $ws->registerObserver($display);
 
-    $statsDisplay= new CStatsDisplay();
+    $statsDisplay= new StatsDisplay();
     $ws->registerObserver($statsDisplay);
 
     $ws->setMeasurements(3, 0.7, 760);

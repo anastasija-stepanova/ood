@@ -1,8 +1,8 @@
 <?php
 
-class CDisplay implements IObserver
+class Display implements ObserverInterface
 {
-    public function update(SWeatherInfo $data): void
+    public function update(WeatherInfo $data): void
     {
         echo "Current Temp " . $data->temperature . "\n";
         echo "Current Hum " . $data->humidity . "\n";

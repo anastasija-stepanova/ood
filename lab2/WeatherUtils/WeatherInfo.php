@@ -1,6 +1,6 @@
 <?php
 
-class SWeatherInfo
+class WeatherInfo
 {
     /** @var float */
     public $temperature = 0.0;
