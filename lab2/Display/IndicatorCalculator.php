@@ -11,21 +11,35 @@ class IndicatorCalculator
     /** @var int */
     public $countAcc = 0;
 
+    /**
+     * @return float
+     */
+    public function getMin(): float
+    {
+        return $this->min;
+    }
+
+    /**
+     * @return float
+     */
+    public function getMax(): float
+    {
+        return $this->max;
+    }
+
+    /**
+     * @return float
+     */
+    public function getAverage(): float
+    {
+        return $this->countAcc != 0 ? $this->acc / $this->countAcc : 0;
+    }
+
     public function updateIndicator(float $data): void
     {
         $this->max = max([$this->max, $data]);
         $this->min = min([$this->min, $data]);
         $this->acc += $data;
         ++$this->countAcc;
-
-        $this->getInformation();
-    }
-
-    private function getInformation()
-    {
-        echo "Max " . round($this->max, 3) . "\n";
-        echo "Min " . round($this->min, 3) . "\n";
-        echo "Average " . round(($this->acc / $this->countAcc), 3) . "\n";
-        echo "----------------" . "\n";
     }
 }
