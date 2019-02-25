@@ -2,16 +2,7 @@
 
 class Observable implements ObservableInterface
 {
-    /**
-     * @var ObservableType
-     */
-    private $type;
     private $observers = [];
-
-    public function __construct(ObservableType $type)
-    {
-        $this->type = $type;
-    }
 
     public function registerObserver(ObserverInterface $observer, int $priority): void
     {
@@ -26,7 +17,6 @@ class Observable implements ObservableInterface
         } else {
             $this->observers[$item] = $newObserver;
         }
-        $this->sortObservers();
     }
 
     public function removeObserver(ObserverInterface $observer): void
@@ -39,6 +29,9 @@ class Observable implements ObservableInterface
 
     public function notifyObservers(): void
     {
+        usort($this->observers, function ($left, $right) {
+            return $left["priority"] < $right["priority"];
+        });
         foreach ($this->observers as $observer) {
             $observer["observer"]->update($this);
         }
@@ -47,13 +40,5 @@ class Observable implements ObservableInterface
     private function searchObserver($observer)
     {
         return array_search($observer, $this->observers);
-    }
-
-    private function sortObservers()
-    {
-        usort($this->observers, function ($left, $right)
-        {
-            return $left["priority"] < $right["priority"];
-        });
     }
 }
