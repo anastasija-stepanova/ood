@@ -13,16 +13,17 @@ class StatsDisplay implements ObserverInterface
         $this->statPressure = new IndicatorCalculator();
     }
 
-    public function update(WeatherInfo $data): void
+    public function update(ObservableInterface $observable, ObservableType $type): void
     {
+        echo $type . "\n";
         echo "Temperature info:\n";
-        $this->statTemp->updateIndicator($data->temperature);
+        $this->statTemp->updateIndicator($observable->getTemperature());
         $this->printIndicatorStatistics($this->statTemp);
         echo "Humidity info:\n";
-        $this->statHumidity->updateIndicator($data->humidity);
+        $this->statHumidity->updateIndicator($observable->getHumidity());
         $this->printIndicatorStatistics($this->statHumidity);
         echo "Pressure info:\n";
-        $this->statPressure->updateIndicator($data->pressure);
+        $this->statPressure->updateIndicator($observable->getPressure());
         $this->printIndicatorStatistics($this->statPressure);
     }
 
