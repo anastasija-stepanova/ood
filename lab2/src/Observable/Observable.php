@@ -2,6 +2,7 @@
 
 class Observable implements ObservableInterface
 {
+    /** @var ObserverInterface[] */
     private $observers = [];
 
     public function registerObserver(ObserverInterface $observer, int $priority): void
@@ -30,6 +31,7 @@ class Observable implements ObservableInterface
 
     public function notifyObservers(): void
     {
+        /** @var array $observer */
         foreach ($this->observers as $observer) {
             $observer["observer"]->update($this);
         }

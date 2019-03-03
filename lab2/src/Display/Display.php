@@ -2,6 +2,9 @@
 
 class Display implements ObserverInterface
 {
+    /**
+     * @param ObservableInterface|WeatherStation $observable
+     */
     public function update(ObservableInterface $observable): void
     {
         echo "Current Temp " . $observable->getTemperature() . "\n";

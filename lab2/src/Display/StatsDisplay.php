@@ -13,6 +13,9 @@ class StatsDisplay implements ObserverInterface
         $this->statPressure = new IndicatorCalculator();
     }
 
+    /**
+     * @param ObservableInterface|WeatherStation $observable
+     */
     public function update(ObservableInterface $observable): void
     {
         echo "Temperature info:\n";
@@ -26,6 +29,9 @@ class StatsDisplay implements ObserverInterface
         $this->printIndicatorStatistics($this->statPressure);
     }
 
+    /**
+     * @param $indicator IndicatorCalculator
+     */
     private function printIndicatorStatistics($indicator): void
     {
         $max = ($this->checkIndicatorValue($indicator->getMax()));
