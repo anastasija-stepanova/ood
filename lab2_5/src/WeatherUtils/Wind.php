@@ -2,6 +2,8 @@
 
 class Wind
 {
-    public $direction = 0;
-    public $speed = 0;
+    /**  @var float */
+    public $direction = 0.0;
+    /**  @var float */
+    public $speed = 0.0;
 }

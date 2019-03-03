@@ -13,19 +13,14 @@ function main()
     $statsDisplay = new StatsDisplay();
     $ws->registerObserver($statsDisplay, 999);
     $wind = new Wind();
-    $wind->direction = 0;
-    $wind->speed = 5;
+    $wind->direction = 0.0;
+    $wind->speed = 5.0;
 
     $ws->setMeasurements(3, 0.7, 760, $wind);
 
-    $wind->speed = 10;
-    $wind->direction = 90;
+    $wind->speed = 10.0;
+    $wind->direction = 90.0;
     $ws->setMeasurements(4, 0.8, 761, $wind);
-
-    $ws->removeObserver($statsDisplay);
-
-    $ws->setMeasurements(10, 0.8, 761, $wind);
-    $ws->setMeasurements(-10, 0.8, 761, $wind);
 
     return 0;
 }

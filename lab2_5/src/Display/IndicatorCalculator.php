@@ -6,13 +6,16 @@ class IndicatorCalculator
     public $min = PHP_FLOAT_MAX;
     /** @var float */
     public $max = PHP_FLOAT_MIN;
+    /** @var float */
+    public $average = 0;
     /** @var int */
-    public $acc = 0;
+    private $acc = 0;
     /** @var int */
-    public $countAcc = 0;
-    public $angle;
-    public $sumX = 0;
-    public $sumY = 0;
+    private $countAcc = 0;
+    /** @var int */
+    private $sumX = 0;
+    /** @var int */
+    private $sumY = 0;
 
     /**
      * @return float
@@ -35,44 +38,31 @@ class IndicatorCalculator
      */
     public function getAverage(): float
     {
-        return $this->countAcc != 0 ? $this->acc / $this->countAcc : 0;
+        return $this->average;
     }
 
-    public function getAngle()
+    public function updateIndicator($data): void
     {
-        return $this->angle;
+        if (gettype($data) == "double") {
+            $this->getMaxMin($data);
+
+            $this->acc += $data;
+            $this->average = $this->countAcc != 0 ? $this->acc / $this->countAcc : 0;
+        } else {
+            $this->getMaxMin($data->direction);
+
+            $this->sumX += cos(($data->direction * M_PI) / 180);
+            $this->sumY += sin(($data->direction * M_PI) / 180);
+
+            $this->average = atan2($this->sumY / $this->countAcc, $this->sumX / $this->countAcc) * 180 / M_PI;
+        }
+
+        ++$this->countAcc;
     }
 
-    public function updateIndicator(float $data): void
+    private function getMaxMin(float $data): void
     {
         $this->max = max([$this->max, $data]);
         $this->min = min([$this->min, $data]);
-        $this->acc += $data;
-        ++$this->countAcc;
-    }
-
-    public function updateCompositeIndicator(Wind $data): void
-    {
-        $x = cos($data->direction);
-        $y = sin($data->direction);
-
-        $x *= $data->speed;
-        $y *= $data->speed;
-
-        $this->sumX += $x;
-        $this->sumY += $y;
-
-        $this->acc += $data->speed;
-        ++$this->countAcc;
-
-        $argX = $this->sumX / $this->countAcc;
-        $argY = $this->sumY / $this->countAcc;
-        $angle = atan2($argY, $argX);
-
-        $this->angle = rad2deg($angle);
-//        $this->angle = $angle * (180 / M_PI);
-//        if ($this->angle < 0) {
-//            $this->angle += 360;
-//        }
     }
 }
