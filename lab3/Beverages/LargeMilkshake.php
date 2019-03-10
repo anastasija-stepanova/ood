@@ -1,8 +1,8 @@
 <?php
 
-class Capuccino extends Coffee
+class LargeMilkshake extends Milkshake
 {
-    public function __construct(string $description = "Capuccino")
+    public function __construct(string $description = "Large Milkshake")
     {
         parent::__construct($description);
     }

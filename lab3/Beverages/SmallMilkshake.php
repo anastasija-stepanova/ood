@@ -1,6 +1,6 @@
 <?php
 
-class Milkshake extends Beverage
+class SmallMilkshake extends Milkshake
 {
     public function __construct(string $description = "Milkshake")
     {
@@ -9,6 +9,6 @@ class Milkshake extends Beverage
 
     public function getCost(): float
     {
-        return 80;
+        return 50;
     }
 }

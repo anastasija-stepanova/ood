@@ -6,10 +6,16 @@ class IceCubes extends CondimentDecorator
     /** @var IceCubeType */
     private $type;
 
+    public function __construct(BeverageInterface $beverage, int $quantity = 1, IceCubeType $type = null)
+    {
+        parent::__construct($beverage);
+        $this->quantity = $quantity;
+        $this->type = $type;
+    }
+
     protected function getCondimentDescription(): string
     {
-        return $this->type == IceCubeType::Dry() ? "Dry" : "Water"
-            . " ice cubes x " . $this->quantity;
+        return $this->type == IceCubeType::Dry() ? "Dry" : "Water" . " ice cubes x " . $this->quantity;
     }
 
     protected function getCondimentCost(): float

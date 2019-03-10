@@ -1,6 +1,6 @@
 <?php
 
-class Beverage implements BeverageInterface
+abstract class Beverage implements BeverageInterface
 {
     private $description;
 
@@ -14,8 +14,5 @@ class Beverage implements BeverageInterface
         return $this->description;
     }
 
-    public function getCost(): float
-    {
-
-    }
+    abstract public function getCost(): float;
 }
