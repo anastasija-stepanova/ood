@@ -10,12 +10,9 @@ class WeatherStation extends Observable
     private $pressure = 760.0;
     /** @var Wind */
     private $wind;
-    /** @var ObservableType */
-    private $type;
 
-    public function __construct(ObservableType $type)
+    public function __construct()
     {
-        $this->type = $type;
         $this->wind  = new Wind();
     }
 
@@ -39,22 +36,17 @@ class WeatherStation extends Observable
         return $this->pressure;
     }
 
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
     public function measurementsChanged(): void
     {
         $this->notifyObservers();
     }
 
-    public function setMeasurements(float $temp, float $humidity, float $pressure, Wind $wind = null)
+    public function setMeasurements(float $temp, float $humidity, float $pressure, Wind $wind)
     {
         $this->humidity = $humidity;
         $this->temperature = $temp;
         $this->pressure = $pressure;
-        $this->wind = $wind != null ? $wind : new Wind();
+        $this->wind = $wind;
 
         $this->measurementsChanged();
     }

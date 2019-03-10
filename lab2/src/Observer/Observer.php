@@ -15,7 +15,7 @@ class Observer implements ObserverInterface
      */
     public function update(ObservableInterface $observable): void
     {
-        echo $this->name . PHP_EOL;
+        echo $this->name . "\n";
         $observable->removeObserver($this);
     }
 }

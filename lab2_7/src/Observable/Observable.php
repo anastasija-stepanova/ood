@@ -1,11 +1,23 @@
 <?php
 
+//ассоциативный массив ключ - событие, значение-массив наблюдателей
+
 class Observable implements ObservableInterface
 {
     private $observers = [];
+    public $developments = [];
 
-    public function registerObserver(ObserverInterface $observer, int $priority): void
+    public function getDevelopments(): array
     {
+        return $this->developments;
+    }
+
+    public function registerObserver(ObserverInterface $observer, int $priority, string $development): void
+    {
+        if (!in_array($development, $this->developments, true)) {
+
+            $this->developments [] = $development;
+        }
         $newObserver = [
             "priority" => $priority,
             "observer" => $observer,
@@ -36,6 +48,14 @@ class Observable implements ObservableInterface
         }
     }
 
+    public function unsubscribe(ObserverInterface $observer, string $development)
+    {
+        if (in_array($development, $this->developments, true)) {
+
+            unset($this->developments[$development]);
+        }
+    }
+
     private function searchObserver($observer)
     {
         return array_search($observer, $this->observers);
@@ -43,7 +63,8 @@ class Observable implements ObservableInterface
 
     private function sortObservers()
     {
-        usort($this->observers, function ($left, $right) {
+        usort($this->observers, function ($left, $right)
+        {
             return $left["priority"] < $right["priority"];
         });
     }

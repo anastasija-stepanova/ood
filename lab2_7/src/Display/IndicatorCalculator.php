@@ -41,24 +41,22 @@ class IndicatorCalculator
         return $this->average;
     }
 
-    public function updateIndicator(float $data): void
+    public function updateIndicator($data): void
     {
-        $this->getMaxMin($data);
+        if (gettype($data) == "double") {
+            $this->getMaxMin($data);
 
-        $this->acc += $data;
-        $this->average = $this->countAcc != 0 ? $this->acc / $this->countAcc : 0;
+            $this->acc += $data;
+            $this->average = $this->countAcc != 0 ? $this->acc / $this->countAcc : 0;
+        } else {
+            $this->getMaxMin($data->direction);
 
-        ++$this->countAcc;
-    }
+            $this->sumX += cos(($data->direction * M_PI) / 180);
+            $this->sumY += sin(($data->direction * M_PI) / 180);
 
-    public function updateWind(Wind $data): void
-    {
-        $this->getMaxMin($data->direction);
+            $this->average = atan2($this->sumY / $this->countAcc, $this->sumX / $this->countAcc) * 180 / M_PI;
+        }
 
-        $this->sumX += cos(($data->direction * M_PI) / 180);
-        $this->sumY += sin(($data->direction * M_PI) / 180);
-
-        $this->average = atan2($this->sumY / $this->countAcc, $this->sumX / $this->countAcc) * 180 / M_PI;
         ++$this->countAcc;
     }
 

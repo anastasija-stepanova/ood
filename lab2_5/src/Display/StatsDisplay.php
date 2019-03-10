@@ -32,7 +32,7 @@ class StatsDisplay implements ObserverInterface
         $this->statWindSpeed->updateIndicator($observable->getWind()->speed);
         $this->printIndicatorStatistics($this->statWindSpeed);
         echo "Wind direction info:\n";
-        $this->statWindDirection->updateIndicator($observable->getWind());
+        $this->statWindDirection->updateWind($observable->getWind());
         $this->printIndicatorStatistics($this->statWindDirection);
     }
 
