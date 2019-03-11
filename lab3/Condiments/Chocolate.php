@@ -1,5 +1,5 @@
 <?php
-
+//
 class Chocolate extends CondimentDecorator
 {
     /**  @var int */
@@ -9,9 +9,9 @@ class Chocolate extends CondimentDecorator
     {
         parent::__construct($beverage);
 
-        if ($count > 5)
+        if ($count < 0 || $count > 5)
         {
-            throw new \OutOfRangeException('Maximum five slices');
+            throw new OutOfRangeException('Minimum zero slice and maximum five slices');
         }
         $this->count = $count;
     }

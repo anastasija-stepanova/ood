@@ -2,13 +2,20 @@
 
 class Capuccino extends Coffee
 {
-    public function __construct(string $description = "Capuccino")
+    private const STANDARD_PORTION = 1;
+
+    private $size;
+    private $description;
+
+    public function __construct(string $description = "Capuccino", int $size = self::STANDARD_PORTION)
     {
-        parent::__construct($description);
+        $this->description = $this->size == self::STANDARD_PORTION ? $description : "Double Capuccino";
+        parent::__construct($this->description);
+        $this->size = $size;
     }
 
     public function getCost(): float
     {
-        return 80;
+        return $this->size == self::STANDARD_PORTION ? 80 : 120;
     }
 }

@@ -1,0 +1,1 @@
+C:30:"PHPUnit\Runner\TestResultCache":298:{a:2:{s:7:"defects";a:3:{s:7:"Warning";i:6;s:40:"WeatherStationTest::testObserverPriority";i:4;s:39:"BeverageTests::testCountChocolateSlices";i:4;}s:5:"times";a:3:{s:7:"Warning";d:0.006;s:40:"WeatherStationTest::testObserverPriority";d:0.022;s:39:"BeverageTests::testCountChocolateSlices";d:0.021;}}}

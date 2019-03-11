@@ -33,7 +33,7 @@ function execute(): void
         echo $beverage->getDescription() . ' cost: ' . $beverage->getCost() . "\n";
     }
     {
-        $beverage = new DoubleCapuccino();
+        $beverage = new Capuccino("Double Capuccino", 2);
         $beverage = new IceCubes($beverage, 2, IceCubeType::Dry());
         $beverage = new CoconutFlakes($beverage, 12);
         echo $beverage->getDescription() . ' cost: ' . $beverage->getCost() . "\n";
@@ -45,9 +45,9 @@ function execute(): void
         echo $beverage->getDescription() . ' cost: ' . $beverage->getCost() . "\n";
     }
     try {
-        $beverage = new DoubleLatte();
+        $beverage = new Coffee();
         $beverage = new IceCubes($beverage, 1, IceCubeType::Water());
-        $beverage = new Chocolate($beverage, 6);
+        $beverage = new Chocolate($beverage, -5);
         echo $beverage->getDescription() . ' cost: ' . $beverage->getCost() . "\n";
     } catch (OutOfRangeException $exception) {
         echo $exception->getMessage();

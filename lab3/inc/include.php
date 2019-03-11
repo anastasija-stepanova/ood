@@ -13,8 +13,6 @@ require_once(__DIR__ . '/../Beverages/HerbalTea.php');
 require_once(__DIR__ . '/../Beverages/WhiteTea.php');
 require_once(__DIR__ . '/../Beverages/Capuccino.php');
 require_once(__DIR__ . '/../Beverages/Latte.php');
-require_once(__DIR__ . '/../Beverages/DoubleCapuccino.php');
-require_once(__DIR__ . '/../Beverages/DoubleLatte.php');
 require_once(__DIR__ . '/../Beverages/Milkshake.php');
 require_once(__DIR__ . '/../Beverages/LargeMilkshake.php');
 require_once(__DIR__ . '/../Beverages/MediumMilkshake.php');
