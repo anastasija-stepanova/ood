@@ -5,7 +5,7 @@ use \PHPUnit\Framework\TestCase;
 
 class BeverageTests extends TestCase
 {
-    public function testCountChocolateSlices()
+    public function test_getExceptionForNegativeCountChocolateSlices()
     {
         try{
             $beverage = new Coffee();
