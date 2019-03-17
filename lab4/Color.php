@@ -1,11 +1,18 @@
 <?php
 
-class Color extends \MyCLabs\Enum\Enum
+class Color
 {
-    private const Green = "Green";
-    private const Red = "Red";
-    private const Blue = "Blue";
-    private const Yellow = "Yellow";
-    private const Pink = "Pink";
-    private const Black = "Black";
+    private const COLOR = [
+        "green" => "#00ff00",
+        "red" => "#ff0000",
+        "blue" => "#0000ff",
+        "yellow" => "#f0ff12",
+        "pink" => "#ffc0cb",
+        "black" => "#000000",
+    ];
+
+    public static function getColorByType(string $type = ""): string
+    {
+        return self::COLOR[$type] ?? null;
+    }
 }
