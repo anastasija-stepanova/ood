@@ -15,8 +15,8 @@ namespace app
 
     function paintPicture(CanvasPainter $painter): void
     {
-        $triangle = new Triangle(new Point(10, 15), new Point(100, 200), new Point(150, 250));
-        $rectangle = new Rectangle(new Point(30, 40), 18, 24);
+        $triangle = new Triangle(new Point(10, 15), new Point(100, 200), new Point(150, 250), new RGBAColor(250, 250, 250, 1));
+        $rectangle = new Rectangle(new Point(30, 40), 18, 24, new RGBAColor(250, 250, 250, 1));
 
         echo "Triangle:\n";
         $painter->draw($triangle);
