@@ -1,8 +1,10 @@
 <?php
 
-namespace modern_graphics_lib
+namespace app
 {
     use graphics_lib\CanvasInterface;
+    use modern_graphics_lib\ModernGraphicsRenderer;
+    use modern_graphics_lib\Point;
 
     class ModernGraphicsRendererClassAdapter extends ModernGraphicsRenderer implements CanvasInterface
     {

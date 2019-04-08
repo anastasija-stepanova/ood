@@ -33,27 +33,11 @@ namespace graphics_lib_pro
         }
 
         /**
-         * @param mixed $r
-         */
-        public function setR($r): void
-        {
-            $this->r = $r;
-        }
-
-        /**
          * @return mixed
          */
         public function getG()
         {
             return $this->g;
-        }
-
-        /**
-         * @param mixed $g
-         */
-        public function setG($g): void
-        {
-            $this->g = $g;
         }
 
         /**
@@ -65,27 +49,11 @@ namespace graphics_lib_pro
         }
 
         /**
-         * @param mixed $b
-         */
-        public function setB($b): void
-        {
-            $this->b = $b;
-        }
-
-        /**
          * @return mixed
          */
         public function getA()
         {
             return $this->a;
-        }
-
-        /**
-         * @param mixed $a
-         */
-        public function setA($a): void
-        {
-            $this->a = $a;
         }
     }
 }
