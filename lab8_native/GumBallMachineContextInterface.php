@@ -1,6 +1,6 @@
 <?php
 
-interface GumBallMachineInterface
+interface GumBallMachineContextInterface
 {
     public function releaseBall(): void;
 

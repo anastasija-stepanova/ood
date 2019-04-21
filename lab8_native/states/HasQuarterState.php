@@ -2,10 +2,10 @@
 
 class HasQuarterState implements StateInterface
 {
-    /** @var GumballMachine */
+    /** @var GumballMachineContext */
     private $gumballMachine;
 
-    public function __construct(GumballMachine $gumballMachine)
+    public function __construct(GumballMachineContext $gumballMachine)
     {
         $this->gumballMachine = $gumballMachine;
     }

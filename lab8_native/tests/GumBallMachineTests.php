@@ -4,13 +4,32 @@ require_once("../inc/inc.php");
 
 use \PHPUnit\Framework\TestCase;
 
-
-class GumBallMachineTests extends TestCase
+final class GumBallMachineTests extends TestCase
 {
     /** @var string */
     private $expectedFileName;
     /** @var string */
     private $actualFileName;
+
+    public function testGMAcceptingUpToFiveCoins(): void
+    {
+        $expectedOutput = 'Inserted a quarter. Quarter count: 1' . PHP_EOL;
+        $expectedOutput .= 'Inserted a quarter. Quarter count: 2' . PHP_EOL;
+        $expectedOutput .= 'Inserted a quarter. Quarter count: 3' . PHP_EOL;
+        $expectedOutput .= 'Inserted a quarter. Quarter count: 4' . PHP_EOL;
+        $expectedOutput .= 'Inserted a quarter. Quarter count: 5' . PHP_EOL;
+        $expectedOutput .= 'You can\'t insert more than 5 quarters' . PHP_EOL;
+        $gm = new GumballMachine(1);
+        $this->executeTestCase(function () use ($gm)
+        {
+            $gm->insertQuarter();
+            $gm->insertQuarter();
+            $gm->insertQuarter();
+            $gm->insertQuarter();
+            $gm->insertQuarter();
+            $gm->insertQuarter();
+        }, $expectedOutput);
+    }
 
     public function testGMWithZeroBall(): void
     {
@@ -18,26 +37,9 @@ class GumBallMachineTests extends TestCase
         $this->assertEquals($gm->getBallCount(), 0);
     }
 
-    public function testGMInfoWhenGMIsNotEmpty(): void
-    {
-        $count = 2;
-        $expectedOutput = <<<EOF
-Mighty Gumball, Inc.
-PHP-enabled Standing Gumball Model #2019 (with state)
-Inventory: {$count} gumballs
-Machine is waiting for quarter
-EOF;
-        $gm = new GumballMachine($count);
-        $this->executeTestCase(function () use ($gm)
-        {
-            echo $gm->toString();
-        }, $expectedOutput);
-    }
-
     public function testImpossibleTurnCrankWhenGMIsNotEmpty(): void
     {
         $expectedOutput = 'You turned but there\'s no quarter' . PHP_EOL;
-        $expectedOutput .= 'You need to pay first' . PHP_EOL;
         $gm = new GumballMachine(1);
         $this->executeTestCase(function () use ($gm)
         {
@@ -84,11 +86,70 @@ EOF;
     public function testImpossibleTurnCrankWhenGMIsNotEmptyAndDidNotInsertedQuarter(): void
     {
         $expectedOutput = 'You turned but there\'s no quarter' . PHP_EOL;
-        $expectedOutput .= 'You need to pay first' . PHP_EOL;
         $gm = new GumballMachine(1);
         $this->executeTestCase(function () use ($gm)
         {
             $gm->turnCrank();
+        }, $expectedOutput);
+    }
+    public function testGMWhenGMIsEmpty(): void
+    {
+        $expectedOutput = <<<EOF
+Mighty Gumball, Inc.
+PHP-enabled Standing Gumball Model #2019 (with state)
+Inventory: 0 gumballs
+Machine is waiting for turn of crank
+EOF;
+        $gm = new GumballMachine(0);
+        $this->executeTestCase(function () use ($gm)
+        {
+            echo $gm->toString();
+        }, $expectedOutput);
+    }
+
+    public function testTurnCrankWhenGMIsEmpty(): void
+    {
+        $expectedOutput = 'You turned but there\'s no gumballs' . PHP_EOL;
+        $gm = new GumballMachine(0);
+        $this->executeTestCase(function () use ($gm)
+        {
+            $gm->turnCrank();
+        }, $expectedOutput);
+    }
+
+    public function testInsertQuarterWhenGMIsEmpty(): void
+    {
+        $expectedOutput = 'You can\'t insert a quarter, the machine is sold out' . PHP_EOL;
+        $gm = new GumballMachine(0);
+        $this->executeTestCase(function () use ($gm)
+        {
+            $gm->insertQuarter();
+        }, $expectedOutput);
+    }
+
+    public function testEjectQuarterWhenGMIsEmpty(): void
+    {
+        $expectedOutput = 'You can\'t eject, you haven\'t inserted a quarter yet' . PHP_EOL;
+        $gm = new GumballMachine(0);
+        $this->executeTestCase(function () use ($gm)
+        {
+            $gm->ejectQuarter();
+        }, $expectedOutput);
+    }
+
+    public function testGMInfoWhenGMIsNotEmpty(): void
+    {
+        $count = 2;
+        $expectedOutput = <<<EOF
+Mighty Gumball, Inc.
+PHP-enabled Standing Gumball Model #2019 (with state)
+Inventory: {$count} gumballs
+Machine is waiting for turn of crank
+EOF;
+        $gm = new GumballMachine($count);
+        $this->executeTestCase(function () use ($gm)
+        {
+            echo $gm->toString();
         }, $expectedOutput);
     }
 
@@ -100,7 +161,6 @@ EOF;
         $expectedOutput .= 'A gumball comes rolling out the slot...' . PHP_EOL;
         $expectedOutput .= 'Oops, out of gumballs' . PHP_EOL;
         $expectedOutput .= 'You turned but there\'s no gumballs' . PHP_EOL;
-        $expectedOutput .= 'No gumball dispensed' . PHP_EOL;
         $gm = new GumballMachine(1);
         $this->executeTestCase(function () use ($gm)
         {
@@ -117,59 +177,12 @@ EOF;
         $expectedOutput .= 'You used one quarter. Quarters count: 0' . PHP_EOL;
         $expectedOutput .= 'A gumball comes rolling out the slot...' . PHP_EOL;
         $expectedOutput .= 'You turned but there\'s no quarter' . PHP_EOL;
-        $expectedOutput .= 'You need to pay first' . PHP_EOL;
         $gm = new GumballMachine(2);
         $this->executeTestCase(function () use ($gm)
         {
             $gm->insertQuarter();
             $gm->turnCrank();
             $gm->turnCrank();
-        }, $expectedOutput);
-    }
-
-    public function testGMInfoWhenGMIsEmpty(): void
-    {
-        $expectedOutput = <<<EOF
-Mighty Gumball, Inc.
-PHP-enabled Standing Gumball Model #2019 (with state)
-Inventory: 0 gumballs
-Machine is delivering a gumball 
-EOF;
-        $gm = new GumballMachine(0);
-        $this->executeTestCase(function () use ($gm)
-        {
-            echo $gm->toString();
-        }, $expectedOutput);
-    }
-
-    public function testTurnCrankWhenGMIsEmpty(): void
-    {
-        $expectedOutput = 'Turning twice doesn\'t get you another gumball' . PHP_EOL;
-        $expectedOutput .= 'Oops, out of gumballs' . PHP_EOL;
-        $gm = new GumballMachine(0);
-        $this->executeTestCase(function () use ($gm)
-        {
-            $gm->turnCrank();
-        }, $expectedOutput);
-    }
-
-    public function testInsertQuarterWhenGMIsEmpty(): void
-    {
-        $expectedOutput = 'Inserted a quarter. Quarter count: 1' . PHP_EOL;
-        $gm = new GumballMachine(0);
-        $this->executeTestCase(function () use ($gm)
-        {
-            $gm->insertQuarter();
-        }, $expectedOutput);
-    }
-
-    public function testEjectQuarterWhenGMIsEmpty(): void
-    {
-        $expectedOutput = 'Sorry you already turned the crank' . PHP_EOL;
-        $gm = new GumballMachine(0);
-        $this->executeTestCase(function () use ($gm)
-        {
-            $gm->ejectQuarter();
         }, $expectedOutput);
     }
 

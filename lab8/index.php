@@ -4,7 +4,7 @@ require_once("inc/inc.php");
 
 function main(): void
 {
-    $gm = new GumballMachineContext(5);
+    $gm = new GumballMachine(5);
 
     echo $gm->toString() . PHP_EOL;
     $gm->insertQuarter();
@@ -37,7 +37,7 @@ function main(): void
     $gm->ejectQuarter();
     echo "----\n";
 
-    //echo $gm->toString() . PHP_EOL;
+    echo $gm->toString() . PHP_EOL;
 }
 
 main();

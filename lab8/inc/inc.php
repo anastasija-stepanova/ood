@@ -9,3 +9,4 @@ require_once(__DIR__ . "/../states/SoldOutState.php");
 require_once(__DIR__ . "/../states/SoldState.php");
 require_once(__DIR__ . "/../GumBallMachineContextInterface.php");
 require_once(__DIR__ . "/../GumBallMachineContext.php");
+require_once(__DIR__ . "/../GumBallMachine.php");
