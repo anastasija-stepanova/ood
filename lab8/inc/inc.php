@@ -7,5 +7,5 @@ require_once(__DIR__ . "/../states/HasQuarterState.php");
 require_once(__DIR__ . "/../states/NoQuarterState.php");
 require_once(__DIR__ . "/../states/SoldOutState.php");
 require_once(__DIR__ . "/../states/SoldState.php");
-require_once(__DIR__ . "/../GumBallMachineInterface.php");
-require_once(__DIR__ . "/../GumBallMachine.php");
+require_once(__DIR__ . "/../GumBallMachineContextInterface.php");
+require_once(__DIR__ . "/../GumBallMachineContext.php");

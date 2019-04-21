@@ -2,10 +2,10 @@
 
 class SoldState implements StateInterface
 {
-    /** @var GumballMachine */
+    /** @var GumBallMachineContextInterface */
     private $gumballMachine;
 
-    public function __construct(GumballMachine $gumballMachine)
+    public function __construct(GumBallMachineContextInterface $gumballMachine)
     {
         $this->gumballMachine = $gumballMachine;
     }
@@ -13,7 +13,6 @@ class SoldState implements StateInterface
     public function insertQuarter(): void
     {
         $this->gumballMachine->getQuarterController()->addQuarter();
-//        echo 'Please wait, we\'re already giving you a gumball' . PHP_EOL;
     }
 
     public function ejectQuarter(): void

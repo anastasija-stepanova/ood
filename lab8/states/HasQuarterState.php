@@ -2,10 +2,10 @@
 
 class HasQuarterState implements StateInterface
 {
-    /** @var GumballMachine */
+    /** @var GumBallMachineContextInterface */
     private $gumballMachine;
 
-    public function __construct(GumballMachine $gumballMachine)
+    public function __construct(GumBallMachineContextInterface $gumballMachine)
     {
         $this->gumballMachine = $gumballMachine;
     }
@@ -13,13 +13,11 @@ class HasQuarterState implements StateInterface
     public function insertQuarter(): void
     {
         $this->gumballMachine->getQuarterController()->addQuarter();
-//        echo 'You can\'t insert another quarter' . PHP_EOL;
     }
 
     public function ejectQuarter(): void
     {
         $this->gumballMachine->getQuarterController()->returnQuarter();
-//        echo 'Quarter returned' . PHP_EOL;
         $this->gumballMachine->setNoQuarterState();
     }
 

@@ -2,10 +2,10 @@
 
 class SoldOutState implements StateInterface
 {
-    /** @var GumballMachine */
+    /** @var GumBallMachineContextInterface */
     private $gumballMachine;
 
-    public function __construct(GumballMachine $gumballMachine)
+    public function __construct(GumBallMachineContextInterface $gumballMachine)
     {
         $this->gumballMachine = $gumballMachine;
     }

@@ -33,8 +33,9 @@ class QuarterController implements QuarterControllerInterface
 
     public function returnQuarter(): void
     {
-        if ($this->quarterCount > 0) {
-            echo $this->quarterCount . ' quarter' . $this->quarterCount != 1 ? 's' : '' . ' returned' . PHP_EOL;
+        if ($this->quarterCount >= 0) {
+            $info = $this->quarterCount != 1 ? 's ' : '';
+            echo $this->quarterCount . ' quarter' . $info . ' returned' . PHP_EOL;
         }
         $this->quarterCount = 0;
     }

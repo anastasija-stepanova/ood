@@ -22,10 +22,10 @@ class GumBallMachineTests extends TestCase
     {
         $count = 2;
         $expectedOutput = <<<EOF
-                             Mighty Gumball, Inc.
-                             PHP-enabled Standing Gumball Model #2019 (with state)
-                             Inventory: {$count} gumballs
-                             Machine is waiting for quarter
+Mighty Gumball, Inc.
+PHP-enabled Standing Gumball Model #2019 (with state)
+Inventory: {$count} gumballs
+Machine is waiting for quarter
 EOF;
         $gm = new GumballMachine($count);
         $this->executeTestCase(function () use ($gm)
@@ -130,10 +130,10 @@ EOF;
     public function testGMInfoWhenGMIsEmpty(): void
     {
         $expectedOutput = <<<EOF
-                             Mighty Gumball, Inc.
-                             PHP-enabled Standing Gumball Model #2019 (with state)
-                             Inventory: 0 gumballs
-                             Machine is delivering a gumball 
+Mighty Gumball, Inc.
+PHP-enabled Standing Gumball Model #2019 (with state)
+Inventory: 0 gumballs
+Machine is delivering a gumball 
 EOF;
         $gm = new GumballMachine(0);
         $this->executeTestCase(function () use ($gm)
