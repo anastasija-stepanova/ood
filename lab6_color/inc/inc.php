@@ -1,7 +1,5 @@
 <?php
 
-require_once(__DIR__ . "/../Canvas/CanvasInterface.php");
-require_once(__DIR__ . "/../Canvas/Canvas.php");
 require_once(__DIR__ . "/../shape_drawing_lib/Point.php");
 require_once(__DIR__ . "/../shape_drawing_lib/CanvasDrawableInterface.php");
 require_once(__DIR__ . "/../shape_drawing_lib/CanvasPainter.php");

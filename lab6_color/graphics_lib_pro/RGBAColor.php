@@ -4,10 +4,10 @@ namespace graphics_lib_pro
 {
     class RGBAColor
     {
-        public $r;
-        public $g;
-        public $b;
-        public $a;
+        private $r;
+        private $g;
+        private $b;
+        private $a;
 
         /**
          * RGBAColor constructor.

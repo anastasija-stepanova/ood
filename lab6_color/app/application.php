@@ -5,9 +5,8 @@ namespace app
     require_once("../inc/inc.php");
 
     use graphics_lib\Canvas;
+    use graphics_lib_pro\ModernGraphicsRenderer;
     use graphics_lib_pro\RGBAColor;
-    use modern_graphics_lib\ModernGraphicsRenderer;
-    use modern_graphics_lib\ModernGraphicsRendererAdapter;
     use shape_drawing_lib\CanvasPainter;
     use shape_drawing_lib\Point;
     use shape_drawing_lib\Triangle;
@@ -29,7 +28,7 @@ namespace app
 
     function paintPictureOnCanvas(): void
     {
-        $simpleCanvas = new Canvas();
+        $simpleCanvas = new \graphics_lib_pro\Canvas();
         $painter = new CanvasPainter($simpleCanvas);
         paintPicture($painter);
     }

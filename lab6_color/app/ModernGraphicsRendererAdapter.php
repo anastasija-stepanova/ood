@@ -3,7 +3,7 @@
 namespace app
 {
 
-    use graphics_lib\CanvasInterface;
+    use graphics_lib_pro\CanvasInterface;
     use graphics_lib_pro\ModernGraphicsRenderer;
     use graphics_lib_pro\Point;
     use graphics_lib_pro\RGBAColor;
