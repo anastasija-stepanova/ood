@@ -73,7 +73,7 @@ final class GumBallMachineTests extends TestCase
     public function testImpossibleTwiceEjectQuarterWhenGMIsNotEmpty(): void
     {
         $expectedOutput = 'Inserted a quarter. Quarter count: 1' . PHP_EOL;
-        $expectedOutput .= ' returned' . PHP_EOL;
+        $expectedOutput .= '1 quarter returned' . PHP_EOL;
         $expectedOutput .= 'You haven\'t inserted a quarter' . PHP_EOL;
         $gm = new GumballMachine(1);
         $this->executeTestCase(function () use ($gm)
@@ -132,7 +132,8 @@ EOF;
 
     public function testEjectQuarterWhenGMIsEmpty(): void
     {
-        $expectedOutput = 'Sorry you already turned the crank' . PHP_EOL;
+        $expectedOutput = '0 quarters  returned' . PHP_EOL;
+        $expectedOutput .= 'Sorry you already turned the crank' . PHP_EOL;
         $gm = new GumballMachine(0);
         $this->executeTestCase(function () use ($gm)
         {

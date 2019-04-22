@@ -157,6 +157,12 @@ class GumballMachineContext implements GumBallMachineContextInterface
         return $this->controller;
     }
 
+    public function refill($numBalls)
+    {
+        $this->count = $numBalls;
+        $this->state = $numBalls > 0 ? State::NO_QUARTER : State::SOLD_OUT;
+    }
+
     private function getStringTemplate(): string
     {
         return <<<EOF

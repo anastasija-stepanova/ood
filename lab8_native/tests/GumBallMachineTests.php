@@ -11,6 +11,11 @@ final class GumBallMachineTests extends TestCase
     /** @var string */
     private $actualFileName;
 
+    public function testRefillGM(): void
+    {
+
+    }
+
     public function testGMAcceptingUpToFiveCoins(): void
     {
         $expectedOutput = 'Inserted a quarter. Quarter count: 1' . PHP_EOL;

@@ -39,4 +39,9 @@ class GumballMachine
     {
         return $this->context->getQuarterController();
     }
+
+    public function refill($numBall)
+    {
+        $this->context->refill($numBall);
+    }
 }
