@@ -40,6 +40,7 @@ final class HasQuarterStateTest extends TestCase
         $state->ejectQuarter();
         $actualResult = ob_get_clean();
         $expectedResult = '0 quarters  returned' . PHP_EOL;
+        $expectedResult .= 'Set no quarter state' . PHP_EOL;
         file_put_contents($this->expectedFileName, $expectedResult);
         file_put_contents($this->actualFileName, $actualResult);
         $this->assertFileEquals($this->expectedFileName, $this->actualFileName);
@@ -52,6 +53,7 @@ final class HasQuarterStateTest extends TestCase
         $state->turnCrank();
         $actualResult = ob_get_clean();
         $expectedResult = 'You turned...' . PHP_EOL;
+        $expectedResult .= 'Set sold state' . PHP_EOL;
         file_put_contents($this->expectedFileName, $expectedResult);
         file_put_contents($this->actualFileName, $actualResult);
         $this->assertFileEquals($this->expectedFileName, $this->actualFileName);
@@ -71,7 +73,7 @@ final class HasQuarterStateTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->gm = new GumballMachineContext(0);
+        $this->gm = new GumballMachineContextMock(0);
         $this->expectedFileName = uniqid() . '.txt';
         $this->actualFileName = uniqid() . '.txt';
         parent::setUp();

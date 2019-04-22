@@ -28,6 +28,7 @@ final class NoQuarterStateTest extends TestCase
         $state->insertQuarter();
         $actualResult = ob_get_clean();
         $expectedResult = 'Inserted a quarter. Quarter count: 1' . PHP_EOL;
+        $expectedResult .= 'Set has quarter state' . PHP_EOL;
         file_put_contents($this->expectedFileName, $expectedResult);
         file_put_contents($this->actualFileName, $actualResult);
         $this->assertFileEquals($this->expectedFileName, $this->actualFileName);
@@ -71,7 +72,7 @@ final class NoQuarterStateTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->gm = new GumballMachineContext(0);
+        $this->gm = new GumballMachineContextMock(0);
         $this->expectedFileName = uniqid() . '.txt';
         $this->actualFileName = uniqid() . '.txt';
         parent::setUp();

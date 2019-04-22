@@ -35,7 +35,8 @@ final class SoldStateTest extends TestCase
 
     public function testEjectQuarter(): void
     {
-        $expectedResult = 'Sorry you already turned the crank' . PHP_EOL;
+        $expectedResult = '0 quarters  returned' . PHP_EOL;
+        $expectedResult .= 'Sorry you already turned the crank' . PHP_EOL;
         $state = new SoldState($this->gm);
         ob_start();
         $state->ejectQuarter();
@@ -60,6 +61,7 @@ final class SoldStateTest extends TestCase
     public function testDispenseWhenGumballMachineIsEmpty(): void
     {
         $expectedResult = 'Oops, out of gumballs' . PHP_EOL;
+        $expectedResult .= 'Set sold out state' . PHP_EOL;
         $state = new SoldState($this->gm);
         ob_start();
         $state->dispense();
@@ -98,7 +100,7 @@ final class SoldStateTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->gm = new GumballMachineContext(0);
+        $this->gm = new GumballMachineContextMock(0);
         $this->expectedFileName = uniqid() . '.txt';
         $this->actualFileName = uniqid() . '.txt';
         parent::setUp();

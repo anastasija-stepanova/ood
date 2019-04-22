@@ -39,4 +39,9 @@ class GumballMachine
     {
         return $this->context->getQuarterController();
     }
+
+    public function getQuarterCount(): int
+    {
+        return $this->context->getQuarterCount();
+    }
 }

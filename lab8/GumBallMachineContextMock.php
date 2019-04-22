@@ -1,6 +1,6 @@
 <?php
 
-class GumballMachineContext implements GumBallMachineContextInterface
+class GumballMachineContextMock implements GumBallMachineContextInterface
 {
     /** @var SoldState */
     private $soldState;
@@ -46,38 +46,37 @@ class GumballMachineContext implements GumBallMachineContextInterface
 
     public function setSoldOutState(): void
     {
-        $this->state = $this->soldOutState;
+        echo "Set sold out state" . PHP_EOL;
     }
 
     public function setNoQuarterState(): void
     {
-        $this->state = $this->noQuarterState;
+        echo "Set no quarter state" . PHP_EOL;
     }
 
     public function setSoldState(): void
     {
-        $this->state = $this->soldState;
+        echo "Set sold state" . PHP_EOL;
     }
 
     public function setHasQuarterState(): void
     {
-        $this->state = $this->hasQuarterState;
+        echo "Set has quarter state" . PHP_EOL;
     }
 
     public function ejectQuarter(): void
     {
-        $this->state->ejectQuarter();
+        echo "Eject quarter" . PHP_EOL;
     }
 
     public function insertQuarter(): void
     {
-        $this->state->insertQuarter();
+        echo "Insert quarter" . PHP_EOL;
     }
 
     public function turnCrank(): void
     {
-        $this->state->turnCrank();
-        $this->state->dispense();
+        echo "Turn crank" . PHP_EOL;
     }
 
     public function toString(): string
@@ -91,16 +90,6 @@ class GumballMachineContext implements GumBallMachineContextInterface
     public function getQuarterController(): QuarterController
     {
         return $this->controller;
-    }
-
-    public function refill($numBalls): void
-    {
-        $this->count = $numBalls;
-        if ($numBalls > 0) {
-            $this->setNoQuarterState();
-            return;
-        }
-        $this->setSoldState();
     }
 
     public function getQuarterCount(): int

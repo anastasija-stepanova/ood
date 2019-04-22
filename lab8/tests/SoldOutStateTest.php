@@ -71,7 +71,7 @@ final class SoldOutStateTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->gm = new GumballMachineContext(0);
+        $this->gm = new GumballMachineContextMock(0);
         $this->expectedFileName = uniqid() . '.txt';
         $this->actualFileName = uniqid() . '.txt';
         parent::setUp();

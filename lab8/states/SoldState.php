@@ -33,7 +33,12 @@ class SoldState implements StateInterface
             echo 'Oops, out of gumballs' . PHP_EOL;
             $this->gumballMachine->setSoldOutState();
         } else {
-            $this->gumballMachine->setNoQuarterState();
+            $quarterCount = $this->gumballMachine->getQuarterCount();
+            if ($quarterCount == 0) {
+                $this->gumballMachine->setNoQuarterState();
+                return;
+            }
+            $this->gumballMachine->setHasQuarterState();
         }
     }
 
