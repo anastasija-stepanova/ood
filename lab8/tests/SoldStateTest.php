@@ -75,7 +75,8 @@ final class SoldStateTest extends TestCase
     {
         $expectedResult = 'A gumball comes rolling out the slot...' . PHP_EOL;
         $expectedResult .= 'Oops, out of gumballs' . PHP_EOL;
-        $gm = new GumballMachineContext(1);
+        $expectedResult .= 'Set sold out state' . PHP_EOL;
+        $gm = new GumballMachineContextMock(1);
         $state = new SoldState($gm);
         ob_start();
         $state->dispense();
@@ -88,7 +89,8 @@ final class SoldStateTest extends TestCase
     public function testDispenseWhenGumballMachineHasMoreOneGumball(): void
     {
         $expectedResult = 'A gumball comes rolling out the slot...' . PHP_EOL;
-        $gm = new GumballMachineContext(2);
+        $expectedResult .= 'Set no quarter state' . PHP_EOL;
+        $gm = new GumballMachineContextMock(2);
         $state = new SoldState($gm);
         ob_start();
         $state->dispense();

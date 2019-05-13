@@ -2,13 +2,32 @@
 
 class Paragraph implements ParagraphInterface
 {
-    public function getParagraphText(): string
+    private $text;
+    private $executor;
+
+    public function __construct(string $text, Executor $executor)
     {
-        // TODO: Implement getParagraphText() method.
+        $this->text = $text;
+        $this->executor = $executor;
     }
 
-    public function setParagraphText(): void
+    public function getParagraphText(): string
     {
-        // TODO: Implement setParagraphText() method.
+        return $this->text;
+    }
+
+    public function setParagraphText(string $text): void
+    {
+        $this->executor->addAndExecuteCommand(new ChangeStringCommand($this->text, $text, $this));
+    }
+
+    public function setText(string $text)
+    {
+        $this->text = $text;
+    }
+
+    public function getText(): string
+    {
+        return $this->text;
     }
 }

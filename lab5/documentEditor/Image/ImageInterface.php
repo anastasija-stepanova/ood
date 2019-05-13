@@ -2,7 +2,7 @@
 
 interface ImageInterface
 {
-    public function __construct(string $path, int $width, int $height);
+    public function __construct(string $path, int $width, int $height, Executor $executor, ImageControllerInterface $controller);
     public function getPath(): string;
     public function getHeight(): int;
     public function getWidth(): int;

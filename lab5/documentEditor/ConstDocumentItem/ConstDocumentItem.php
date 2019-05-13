@@ -2,13 +2,18 @@
 
 class ConstDocumentItem implements ConstDocumentItemInterface
 {
+    /** @var ImageInterface */
+    private $image = null;
+    /** @var ParagraphInterface */
+    private $paragraph = null;
+
     public function getImage(): ImageInterface
     {
-        // TODO: Implement getImage() method.
+        return $this->image;
     }
 
     public function getParagraph(): ParagraphInterface
     {
-        // TODO: Implement getParagraph() method.
+        return $this->paragraph;
     }
 }

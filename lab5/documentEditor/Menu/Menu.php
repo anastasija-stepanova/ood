@@ -6,9 +6,9 @@ class Menu implements MenuInterface
     private $items;
     private $exit = false;
 
-    public function addItem(string $shortcut, string $description, CommandInterface $command): void
+    public function addItem(string $shortcut, string $description, Functions $function): void
     {
-        $this->items []= new Item($shortcut, $description, $command);
+        $this->items []= new Item($shortcut, $description, $function);
     }
 
     public function run(): void
@@ -26,6 +26,7 @@ class Menu implements MenuInterface
     {
         echo "Commands list:\n";
         foreach ($this->items as $item) {
+            echo 1;
             echo $item->getShortcut() . ": " . $item->getDescription() . "\n";
         }
     }

@@ -1,6 +1,6 @@
 <?php
 
-class History implements HistoryInterface
+class History implements Executor
 {
     private $commands = [];
     private $nextCommandIndex;

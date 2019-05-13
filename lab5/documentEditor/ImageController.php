@@ -22,13 +22,13 @@ class ImageController implements ImageControllerInterface
         if (!file_exists($path) || is_dir($path)) {
             echo "Incorrect file path: " . $path;
         }
-//        String fileExtension = FilenameUtils.getExtension(path);
-//        String uniqueFileName = UUID.randomUUID().toString();
-//        String newFilePath = this.directory + uniqueFileName + "." + fileExtension;
-//        File newFile = new File(newFilePath);
+        $fileExtension = pathinfo($path, PATHINFO_EXTENSION);
+        $uniqueFileName = uniqid();
+        $newFilePath = $this->directory . $uniqueFileName . "." . $fileExtension;
+//        $newFile = new File($newFilePath);
 //        copyFileUsingChannel(file, newFile);
-//
-//        return newFilePath;
+
+        return $newFilePath;
     }
 
     public function remove(string $path): void
@@ -72,5 +72,4 @@ class ImageController implements ImageControllerInterface
             echo "Create the directory: " . $this->directory;
         }
     }
-
 }

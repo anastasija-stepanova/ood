@@ -5,14 +5,20 @@ class Image implements ImageInterface
     private $path;
     private $width;
     private $height;
+    /** @var Executor */
+    private $executor;
+    /** @var ImageControllerInterface */
+    private $imageController;
     private const MAX_SIZE = 10000;
     private const MIN_SIZE = 1;
 
-    public function __construct(string $path, int $width, int $height)
+    public function __construct(string $path, int $width, int $height, Executor $executor, ImageControllerInterface $controller)
     {
         $this->path = $path;
         $this->width = $width;
         $this->height = $height;
+        $this->executor = $executor;
+        $this->imageController = $controller;
     }
 
     public function getPath(): string
@@ -43,7 +49,13 @@ class Image implements ImageInterface
     public function resize(int $width, int $height): void
     {
         $this->checkImageSize($width, $height);
-        this.executor.addAndExecuteCommand(new ResizeImageCommand(this, this.width, this.height, newWidth, newHeight));
+        $this->executor->addAndExecuteCommand(new ResizeImageCommand($this, $this->width, $this->height, $width,
+            $height));
+    }
+
+    public function getController(): ImageControllerInterface
+    {
+        return $this->imageController;
     }
 
     private function checkImageSize(int $width, int $height): void
