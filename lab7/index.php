@@ -11,8 +11,7 @@ function createSlide(SlideInterface $slide)
     $rect = new Rectangle($rectFrame, new Style(false, new RGBAColor(0, 0, 0, 0)),
         new Style(true, new RGBAColor(0, 0, 0, 0)), 10.0);
 
-    $group = new GroupShape(new Style(true, new RGBAColor(0, 0, 0, 0)), new Style(true, new RGBAColor(0, 0, 0, 0)),
-        10.0);
+    $group = new GroupShape();
     $group->insertShape($ellipse, 0);
     $group->insertShape($rect, 1);
 

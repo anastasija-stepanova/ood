@@ -8,7 +8,7 @@ require_once(__DIR__ . "/canvas/Canvas.php");
 require_once(__DIR__ . "/canvas/CanvasSvg.php");
 require_once(__DIR__ . "/DrawableInterface.php");
 require_once(__DIR__ . "/shapes/Ellipse.php");
-require_once(__DIR__ . "/GroupShape.php");
+require_once(__DIR__ . "/shapes/GroupShape.php");
 require_once(__DIR__ . "/shapes/Point.php");
 require_once(__DIR__ . "/shapes/Rectangle.php");
 require_once(__DIR__ . "/RectD.php");

@@ -9,18 +9,11 @@ class GroupShape implements ShapesInterface, ShapeInterface
     /** @var float */
     private $lineThickness;
     /** @var Shape[] */
-    private $shapes;
-
-    public function __construct(Style $outlineStyle, Style $fillStyle, float $thickness)
-    {
-        $this->outlineStyle = $outlineStyle;
-        $this->fillStyle = $fillStyle;
-        $this->lineThickness = $thickness;
-    }
+    private $shapes = [];
 
     public function getFrame(): RectD
     {
-        $frame = new RectD(INF, INF, -INF, -INF);
+        $frame = new RectD(null, null, null, null);
         $maxRight = 0;
         $maxBottom = 0;
 
@@ -42,9 +35,16 @@ class GroupShape implements ShapesInterface, ShapeInterface
     {
         $oldFrame = $this->getFrame();
 
-        $frame = new RectD(INF, INF, -INF, -INF);
-        $diffX = $frame->getWidth() / $oldFrame->getWidth();
-        $diffY = $frame->getHeight() / $oldFrame->getHeight();
+        if ($oldFrame == null) {
+            return;
+        }
+
+        $frame = new RectD(null, null, null, null);
+        if ($oldFrame->getWidth() == null || $oldFrame->getHeight() == null) {
+            return;
+        }
+        $scaleX = $frame->getWidth() / $oldFrame->getWidth();
+        $scaleY = $frame->getHeight() / $oldFrame->getHeight();
 
         foreach ($this->shapes as $shape) {
             $shapeFrame = $shape->getFrame();
@@ -52,10 +52,10 @@ class GroupShape implements ShapesInterface, ShapeInterface
             $offsetX = $shapeFrame->getLeft() - $oldFrame->getLeft();
             $offsetY = $shapeFrame->getTop() - $oldFrame->getTop();
 
-            $shapeFrame->setLeft($frame->getLeft() + $offsetX * $diffX);
-            $shapeFrame->setTop($frame->getTop() + $offsetY * $diffY);
-            $shapeFrame->setWidth($shapeFrame->getWidth() * $diffX);
-            $shapeFrame->setHeight($shapeFrame->getHeight() * $diffY);
+            $shapeFrame->setLeft($frame->getLeft() + $offsetX * $scaleX);
+            $shapeFrame->setTop($frame->getTop() + $offsetY * $scaleY);
+            $shapeFrame->setWidth($shapeFrame->getWidth() * $scaleX);
+            $shapeFrame->setHeight($shapeFrame->getHeight() * $scaleY);
         }
     }
 
@@ -66,7 +66,7 @@ class GroupShape implements ShapesInterface, ShapeInterface
 
     public function getFillStyle(): StyleInterface
     {
-       return $this->fillStyle;
+        return $this->fillStyle;
     }
 
     public function getShapesCount(): int
@@ -86,6 +86,9 @@ class GroupShape implements ShapesInterface, ShapeInterface
 
     public function removeShapeAtIndex(int $index): void
     {
+        if (count($this->shapes) == 0) {
+            echo "Can not remove element from empty group" . PHP_EOL;
+        }
         unset($this->shapes[$index]);
     }
 

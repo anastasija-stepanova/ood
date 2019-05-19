@@ -28,7 +28,7 @@ abstract class Shape implements ShapeInterface
 
     public function getFrame(): RectD
     {
-        return $this->frame;
+        return clone $this->frame;
     }
 
     public function setFrame(RectD $rect): void

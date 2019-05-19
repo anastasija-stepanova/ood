@@ -18,7 +18,7 @@ class RectD
      * @param $width
      * @param $height
      */
-    public function __construct(float $left, float $top, float $width, float $height)
+    public function __construct($left, $top, $width, $height)
     {
         $this->left = $left;
         $this->top = $top;
@@ -26,7 +26,7 @@ class RectD
         $this->height = $height;
     }
 
-    public function getTop(): float
+    public function getTop()
     {
         return $this->top;
     }
@@ -36,7 +36,7 @@ class RectD
         $this->top = $top;
     }
 
-    public function getLeft(): float
+    public function getLeft()
     {
         return $this->left;
     }
@@ -46,7 +46,7 @@ class RectD
         $this->left = $left;
     }
 
-    public function getHeight(): float
+    public function getHeight()
     {
         return $this->height;
     }
@@ -56,7 +56,7 @@ class RectD
         $this->height = $height;
     }
 
-    public function getWidth(): float
+    public function getWidth()
     {
         return $this->width;
     }
