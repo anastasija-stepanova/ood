@@ -7,4 +7,5 @@ interface SlideInterface
     public function getHeight(): float;
     public function getShapes(): array;
     public function add(GroupShape $shape): void;
+    public function addShape(ShapeInterface $shape): void;
 }

@@ -2,30 +2,49 @@
 
 class Rectangle extends Shape
 {
-    public function __construct(RectD $frame, Style $fillStyle, Style $outlineStyle, float $lineThickness)
+    /** @var Point */
+    private $leftTop;
+    /** @var float */
+    private $width;
+    /** @var float */
+    private $height;
+
+    public function __construct(Point $leftTop, float $width, float $height)
     {
-        parent::__construct($frame, $fillStyle, $outlineStyle, $lineThickness);
+        $this->leftTop = $leftTop;
+        $this->width = $width;
+        $this->height = $height;
+        $defaultColor = new RGBAColor(0, 0, 0, 0);
+        $defaultThickness = 2;
+        $defaultOutlineStyle = new OutlineStyle($defaultColor, $defaultThickness);
+        $defaultFillStyle = new FillStyle($defaultColor);
+        parent::__construct($defaultOutlineStyle, $defaultFillStyle, null);
     }
 
-    public function drawBehavior(CanvasInterface $canvas): void
+    public function getFrame(): RectD
     {
-        $frame = $this->getFrame();
+        return new RectD($this->leftTop, $this->width, $this->height);
+    }
 
-        $xPoints[] = $frame->getLeft();
-        $xPoints[] = $frame->getLeft() + $frame->getWidth();
-        $xPoints[] = $frame->getLeft() + $frame->getWidth();
-        $xPoints[] = $frame->getLeft();
-        $yPoints[] = $frame->getTop();
-        $yPoints[] = $frame->getTop();
-        $yPoints[] = $frame->getTop() + $frame->getHeight();
-        $yPoints[] = $frame->getTop() + $frame->getHeight();
+    public function setFrame(RectD $frame): void
+    {
+        $this->leftTop = $frame->getLeftTopPoint();
+        $this->width = $frame->getWidth();
+        $this->height = $frame->getHeight();
+    }
 
-        $canvas->moveTo($xPoints[0], $yPoints[0]);
-        $canvas->lineTo($xPoints[1], $yPoints[1]);
-        $canvas->lineTo($xPoints[2], $yPoints[2]);
-        $canvas->lineTo($xPoints[3], $yPoints[3]);
-        $canvas->lineTo($xPoints[0], $yPoints[0]);
-
-        $canvas->fillPolygon($xPoints, $yPoints, 4);
+    public function draw(CanvasInterface $canvas): void
+    {
+        $leftX = $this->leftTop->getX();
+        $leftY = $this->leftTop->getY();
+        $rightX = $this->leftTop->getX() + $this->width;
+        $rightY = $this->leftTop->getY() + $this->height;
+        $rightTop = new Point($rightX, $leftY);
+        $rightBottom = new Point($rightX, $rightY);
+        $leftBottom = new Point($leftX, $rightY);
+        $canvas->setOutlineThickness($this->getOutlineStyle()->getOutlineThickness());
+        $canvas->setOutlineColor($this->getOutlineStyle()->getColor());
+        $canvas->setFillColor($this->getFillStyle()->getColor());
+        $canvas->drawPolygon([$this->leftTop, $rightTop, $rightBottom, $leftBottom]);
     }
 }

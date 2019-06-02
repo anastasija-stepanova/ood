@@ -42,4 +42,9 @@ class Slide implements SlideInterface
     {
         $this->shapes[] = $shape;
     }
+
+    public function addShape(ShapeInterface $shape): void
+    {
+        array_push($this->shapes, $shape);
+    }
 }

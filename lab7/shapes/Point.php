@@ -13,35 +13,13 @@ class Point
         $this->y = $y;
     }
 
-    /**
-     * @return float
-     */
     public function getX(): float
     {
-        return $this->x;
+        return round($this->x, 2);
     }
 
-    /**
-     * @param float $x
-     */
-    public function setX(float $x): void
-    {
-        $this->x = $x;
-    }
-
-    /**
-     * @return float
-     */
     public function getY(): float
     {
-        return $this->y;
-    }
-
-    /**
-     * @param float $y
-     */
-    public function setY(float $y): void
-    {
-        $this->y = $y;
+        return round($this->y, 2);
     }
 }

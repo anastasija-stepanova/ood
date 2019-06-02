@@ -3,116 +3,102 @@ require_once("../inc.php");
 
 final class CompositeTests extends \PHPUnit\Framework\TestCase
 {
-    /** @var GroupShape */
-    private $groupShape;
-    private $rect;
-    private $fill;
-    private $outline;
-    /** @var Rectangle */
-    private $rectangle;
-    /** @var Style */
-    private $rectFillStyle;
-    /** @var Style */
-    private $rectLineStyle;
-    /** @var Triangle */
-    private $triangle;
-    /** @var Style */
-    private $triangleFillStyle;
-    /** @var Style */
-    private $triangleLineStyle;
-
-    public function test_groupIsEmpty()
+    public function test_insertIntoGroupAtIndex(): void
     {
-        self::assertEquals($this->groupShape->getShapesCount(), 0);
+        $shapeGroup = new GroupShape();
+        $shapeGroup->insertShape(new MockShape());
+        $shapeGroup->insertShape(new MockShape(), 1);
+        $shapeGroup->insertShape(new MockShape(), 1);
+        $shapeGroup->insertShape(new MockShape(), 2);
+        $this->assertEquals($shapeGroup->getShapesCount(), 4);
     }
 
-    public function test_groupHasEmptyFrame()
+    public function test_removeShapeAtIndex(): void
     {
-        $frame = $this->groupShape->getFrame();
-        self::assertEquals(null, $frame->getLeft());
-        self::assertEquals(null, $frame->getTop());
-        self::assertEquals(null, $frame->getWidth());
-        self::assertEquals(null, $frame->getHeight());
+        $shapeGroup = new GroupShape();
+        $shapeGroup->insertShape(new MockShape());
+        $shapeGroup->insertShape(new MockShape(), 1);
+        $this->assertEquals($shapeGroup->getShapesCount(), 2);
+        $shapeGroup->removeShapeAtIndex(1);
+        $this->assertEquals($shapeGroup->getShapesCount(), 1);
+        $this->assertEquals($this->try_removeAtNoExitsIndex($shapeGroup), 1);
     }
 
-    public function test_groupCanNotChangeFrame()
+    public function test_getFrameWhenAddedOneShape(): void
     {
-        $this->groupShape->setFrame($this->rect);
-        $frame = $this->groupShape->getFrame();
-        self::assertEquals(null, $frame->getLeft());
-        self::assertEquals(null, $frame->getTop());
-        self::assertEquals(null, $frame->getWidth());
-        self::assertEquals(null, $frame->getHeight());
+        $shapeGroup = new GroupShape();
+        $shapeGroup->insertShape(new MockShape());
+        $this->assertEquals($shapeGroup->getShapesCount(), 1);
+        $frame = $shapeGroup->getFrame();
+        $leftTopPoint = $frame->getLeftTopPoint();
+        $this->assertEquals($leftTopPoint->getX(), 1);
+        $this->assertEquals($leftTopPoint->getY(), 1);
+        $this->assertEquals($frame->getWidth(), 10);
+        $this->assertEquals($frame->getHeight(), 10);
     }
 
-//    public function test_canNotRemoveShapeFromEmptyGroup()
-//    {
-//        $expected = "Can not remove element from empty group" . PHP_EOL;
-//        self::assertEquals($expected, $this->groupShape->removeShapeAtIndex(0));
-//    }
-
-    public function test_canInsertShape()
+    public function test_setFrameWhenAddedOneShape(): void
     {
-        $ellipse = new Ellipse($this->rect, $this->fill, $this->outline, 2);
-        $this->groupShape->insertShape($ellipse, 0);
-        self::assertEquals(1, $this->groupShape->getShapesCount());
+        $shapeGroup = new GroupShape();
+        $shapeGroup->insertShape(new MockShape());
+        $point = new Point(10, 10);
+        $width = 50;
+        $height = 50;
+        $newFrame = new RectD($point, $width, $height);
+        $shapeGroup->setFrame($newFrame);
+        $shape = $shapeGroup->getShapeAtIndex(0);
+        $shapeFrame = $shape->getFrame();
+        $leftTop = $shapeFrame->getLeftTopPoint();
+        $this->assertEquals($leftTop->getX(), 10);
+        $this->assertEquals($leftTop->getY(), 10);
+        $this->assertEquals($shapeFrame->getWidth(), 50);
+        $this->assertEquals($shapeFrame->getHeight(), 50);
     }
 
-//    public function test_withCommonStyleReturnTheirCommonStyle()
-//    {
-//        $this->rectFillStyle->setColor(new RGBAColor(150, 150, 150, 1));
-//		$this->triangleFillStyle->setColor(new RGBAColor(150, 150, 150, 1));
-//
-//		$this->groupShape->insertShape($this->rectangle, 0);
-//		$this->groupShape->insertShape($this->triangle, 1);
-//		$commonStyle = $this->groupShape->getFillStyle();
-//
-//		self::assertEquals(true, $commonStyle->isEnabled());
-//    }
-
-    public function test_getRightShapesCount()
+    public function test_getFrameWhenAddedMoreOneShape(): void
     {
-        $this->groupShape->insertShape($this->rectangle, 0);
-		$this->groupShape->insertShape($this->triangle, 8);
-		$this->groupShape->insertShape($this->triangle, 5);
-		self::assertEquals(3, $this->groupShape->getShapesCount());
+        $shapeGroup = new GroupShape();
+        $shapeGroup->insertShape(new MockShape(10, 50, 10, 10));
+        $shapeGroup->insertShape(new MockShape(25, 65, 10, 10));
+        $shapeGroup->insertShape(new MockShape(50, 45, 20, 20));
+        $frame = $shapeGroup->getFrame();
+        $leftTop = $frame->getLeftTopPoint();
+        $this->assertEquals($leftTop->getX(), 10);
+        $this->assertEquals($leftTop->getY(), 45);
+        $this->assertEquals($frame->getHeight(), 30);
+        $this->assertEquals($frame->getWidth(), 60);
     }
 
-//    public function test_changeFrameAfterChangingItsOwnFrame()
-//    {
-//        $rectFrame = $this->rectangle->getFrame();
-//		$this->groupShape->insertShape($this->rectangle, 0);
-//
-//		$groupFrame = $this->groupShape->getFrame();
-//		self::assertEquals($rectFrame->getTop(), $groupFrame->getTop());
-//		self::assertEquals($rectFrame->getLeft(), $groupFrame->getLeft());
-//		self::assertEquals($rectFrame->getWidth(), $groupFrame->getWidth());
-//		self::assertEquals($rectFrame->getHeight(), $groupFrame->getHeight());
-
-//		$newFrame = new RectD(5, 5, 400, 800);
-//		$this->groupShape->setFrame($newFrame);
-//
-//		$groupFrame = $this->groupShape->getFrame();
-//        self::assertEquals($groupFrame->getTop(), $newFrame->getTop());
-//        self::assertEquals($groupFrame->getLeft(), $newFrame->getLeft());
-//        self::assertEquals($groupFrame->getWidth(), $newFrame->getWidth());
-//        self::assertEquals($groupFrame->getHeight(), $newFrame->getHeight());
-//    }
-
-    protected function setUp(): void
+    public function test_setFrameWhenAddedMoreOneShape(): void
     {
-        $this->groupShape = new GroupShape();
-        $this->rect = new RectD(10, 10, 10, 10);
-        $this->fill = new Style(true, new RGBAColor(250, 250, 250, 1));
-        $this->outline = new Style(true, new RGBAColor(250, 250, 250, 1));
-        $this->rectangle = new Rectangle($this->rect, $this->fill, $this->outline, 2);
-        $this->rectFillStyle = $this->rectangle->getFillStyle();
-        $this->rectLineStyle = $this->rectangle->getOutlineStyle();
+        $shapeGroup = new GroupShape();
+        $shapeGroup->insertShape(new MockShape(10, 50, 10, 10));
+        $shapeGroup->insertShape(new MockShape(25, 65, 10, 10));
+        $shapeGroup->insertShape(new MockShape(50, 45, 30, 50));
+        $point = new Point(0, 5);
+        $width = 30;
+        $height = 25;
+        $frame = new RectD($point, $width, $height);
+        $shapeGroup->setFrame($frame);
+        $shape = $shapeGroup->getShapeAtIndex(2);
+        $frame = $shape->getFrame();
+        $leftTop = $frame->getLeftTopPoint();
+        $this->assertEquals($frame->getWidth(), 11.25);
+        $this->assertEquals($frame->getHeight(), 14.29);
+        $this->assertEquals($leftTop->getX(), 18.75);
+        $this->assertEquals($leftTop->getY(), 15.71);
+    }
 
-        $this->triangle = new Triangle($this->rect, $this->fill, $this->outline, 2);
-        $this->triangleFillStyle = $this->triangle->getFillStyle();
-        $this->triangleLineStyle = $this->triangle->getOutlineStyle();
-        parent::setUp();
+    private function try_removeAtNoExitsIndex(GroupShape $shapeGroup): int
+    {
+        $code = 0;
+        try {
+            $shapeGroup->removeShapeAtIndex(10);
+        } catch (\OutOfRangeException $e) {
+            $code = 1;
+        }
+
+        return $code;
     }
 
     protected function tearDown(): void

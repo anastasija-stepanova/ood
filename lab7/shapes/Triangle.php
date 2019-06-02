@@ -2,27 +2,63 @@
 
 class Triangle extends Shape
 {
-    public function __construct(RectD $frame, Style $fillStyle, Style $outlineStyle, float $lineThickness)
+    /** @var Point */
+    private $vertexA;
+    /** @var Point */
+    private $vertexB;
+    /** @var Point */
+    private $vertexC;
+
+    public function __construct(Point $vertexA, Point $vertexB, Point $vertexC)
     {
-        parent::__construct($frame, $fillStyle, $outlineStyle, $lineThickness);
+        $this->vertexA = $vertexA;
+        $this->vertexB = $vertexB;
+        $this->vertexC = $vertexC;
+        $defaultColor = new RGBAColor(0, 0, 0, 0);
+        $defaultThickness = 2;
+        $defaultOutlineStyle = new OutlineStyle($defaultColor, $defaultThickness);
+        $defaultFillStyle = new FillStyle($defaultColor);
+        parent::__construct($defaultOutlineStyle, $defaultFillStyle, null);
     }
 
-    public function drawBehavior(CanvasInterface $canvas): void
+    public function getFrame(): RectD
     {
-        $frame = $this->getFrame();
+        $minX = min($this->vertexA->getX(), $this->vertexB->getX(), $this->vertexC->getX());
+        $maxX = max($this->vertexA->getX(), $this->vertexB->getX(), $this->vertexC->getX());
+        $minY = min($this->vertexA->getY(), $this->vertexB->getY(), $this->vertexC->getY());
+        $maxY = max($this->vertexA->getY(), $this->vertexB->getY(), $this->vertexC->getY());
+        $width = $maxX - $minX;
+        $height = $maxY - $minY;
+        $point = new Point($maxX, $minY);
 
-        $xPoints[] = $frame->getLeft();
-        $xPoints[] = $frame->getLeft() + $frame->getWidth() / 2.0;
-        $xPoints[] = $frame->getLeft() + $frame->getWidth();
-        $yPoints[] = $frame->getTop() + $frame->getHeight();
-        $yPoints[] = $frame->getTop();
-        $yPoints[] = $frame->getTop() + $frame->getHeight();
+        return new RectD($point, $width, $height);
+    }
 
-        $canvas->moveTo($xPoints[0], $yPoints[0]);
-        $canvas->lineTo($xPoints[1], $yPoints[1]);
-        $canvas->lineTo($xPoints[2], $yPoints[2]);
-        $canvas->lineTo($xPoints[0], $yPoints[0]);
+    public function setFrame(RectD $frame): void
+    {
+        $oldFrame = $this->getFrame();
+        $this->vertexA = $this->updateVertex($this->vertexA, $oldFrame, $frame);
+        $this->vertexB = $this->updateVertex($this->vertexB, $oldFrame, $frame);
+        $this->vertexC = $this->updateVertex($this->vertexC, $oldFrame, $frame);
+    }
 
-        $canvas->fillPolygon($xPoints, $yPoints, 3);
+    public function draw(CanvasInterface $canvas): void
+    {
+        $canvas->setOutlineThickness($this->getOutlineStyle()->getOutlineThickness());
+        $canvas->setOutlineColor($this->getOutlineStyle()->getColor());
+        $canvas->setFillColor($this->getFillStyle()->getColor());
+        $canvas->drawPolygon([$this->vertexA, $this->vertexB, $this->vertexC]);
+    }
+
+    private function updateVertex(Point $point, RectD $oldFrame, RectD $frame): Point
+    {
+        $oldLeftTop = $oldFrame->getLeftTopPoint();
+        $scaleX = ($point->getX() - $oldLeftTop->getX()) / $oldFrame->getWidth();
+        $scaleY = ($point->getY() - $oldLeftTop->getY()) / $oldFrame->getHeight();
+        $leftTop = $frame->getLeftTopPoint();
+        $x = $leftTop->getX() + $frame->getWidth() * $scaleX;
+        $y = $leftTop->getY() + $frame->getHeight() * $scaleY;
+
+        return new Point($x, $y);
     }
 }

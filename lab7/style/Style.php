@@ -23,7 +23,7 @@ class Style implements StyleInterface
         return $this->isEnabled;
     }
 
-    public function enabled(bool $enable): void
+    public function enabled(bool $enabled): void
     {
         $this->isEnabled = true;
     }

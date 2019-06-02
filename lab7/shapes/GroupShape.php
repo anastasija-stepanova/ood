@@ -1,72 +1,19 @@
 <?php
 
-class GroupShape implements ShapesInterface, ShapeInterface
+class GroupShape implements GroupShapeInterface
 {
-    /** @var Style */
-    private $outlineStyle;
-    /** @var Style */
-    private $fillStyle;
-    /** @var float */
-    private $lineThickness;
-    /** @var Shape[] */
-    private $shapes = [];
+    /** @var ShapeInterface[] */
+    private $shapes;
+    /** @var OutlineStyleInterface */
+    private $groupOutlineStyle;
+    /** @var GroupFillStyle */
+    private $groupFillStyle;
 
-    public function getFrame(): RectD
+    public function __construct()
     {
-        $frame = new RectD(null, null, null, null);
-        $maxRight = 0;
-        $maxBottom = 0;
-
-        foreach ($this->shapes as $shape) {
-            $shapeFrame = $shape->getFrame();
-            $frame->setLeft(min($shapeFrame->getLeft(), $frame->getLeft()));
-            $frame->setTop(min($shapeFrame->getTop(), $frame->getTop()));
-            $maxRight = max($shapeFrame->getWidth() . $shapeFrame->getLeft(), $maxRight);
-            $maxBottom = max($shapeFrame->getHeight() . $shapeFrame->getTop(), $maxBottom);
-        }
-
-        $frame->setWidth($maxRight - $frame->getLeft());
-        $frame->setHeight($maxBottom - $frame->getTop());
-
-        return $frame;
-    }
-
-    public function setFrame(RectD $rect): void
-    {
-        $oldFrame = $this->getFrame();
-
-        if ($oldFrame == null) {
-            return;
-        }
-
-        $frame = new RectD(null, null, null, null);
-        if ($oldFrame->getWidth() == null || $oldFrame->getHeight() == null) {
-            return;
-        }
-        $scaleX = $frame->getWidth() / $oldFrame->getWidth();
-        $scaleY = $frame->getHeight() / $oldFrame->getHeight();
-
-        foreach ($this->shapes as $shape) {
-            $shapeFrame = $shape->getFrame();
-
-            $offsetX = $shapeFrame->getLeft() - $oldFrame->getLeft();
-            $offsetY = $shapeFrame->getTop() - $oldFrame->getTop();
-
-            $shapeFrame->setLeft($frame->getLeft() + $offsetX * $scaleX);
-            $shapeFrame->setTop($frame->getTop() + $offsetY * $scaleY);
-            $shapeFrame->setWidth($shapeFrame->getWidth() * $scaleX);
-            $shapeFrame->setHeight($shapeFrame->getHeight() * $scaleY);
-        }
-    }
-
-    public function getOutlineStyle(): StyleInterface
-    {
-        return $this->outlineStyle;
-    }
-
-    public function getFillStyle(): StyleInterface
-    {
-        return $this->fillStyle;
+        $this->shapes = [];
+        $this->groupFillStyle = new GroupFillStyle(new GroupFillStyleEnumerator($this->shapes));
+        $this->groupOutlineStyle = new GroupOutlineStyle(new GroupOutlineStyleEnumerator($this->shapes));
     }
 
     public function getShapesCount(): int
@@ -74,49 +21,102 @@ class GroupShape implements ShapesInterface, ShapeInterface
         return count($this->shapes);
     }
 
-    public function insertShape(ShapeInterface $shape, int $position)
+    public function getShapeAtIndex(int $index): ?ShapeInterface
     {
-        $this->shapes[$position] = $shape;
+        return $this->shapes[$index] ?? null;
     }
 
-    public function getShapeAtIndex(int $index): ShapeInterface
+    public function insertShape(ShapeInterface $shape, ?int $position = null): void
     {
-        return $this->shapes[$index] = null;
+        if (!isset($position)) {
+            array_push($this->shapes, $shape);
+
+            return;
+        }
+        if ($position < 0) {
+            throw new \OutOfRangeException(sprintf('The index %d is out range shape collection', $position));
+        }
+        $this->shapes = array_merge(
+            array_slice($this->shapes, 0, $position),
+            [$shape],
+            array_slice($this->shapes, $position, count($this->shapes))
+        );
     }
 
     public function removeShapeAtIndex(int $index): void
     {
-        if (count($this->shapes) == 0) {
-            echo "Can not remove element from empty group" . PHP_EOL;
+        if (!isset($this->shapes[$index])) {
+            throw new \OutOfRangeException('It\'s impossible to remove shape');
         }
         unset($this->shapes[$index]);
     }
 
-    public function draw(Canvas $canvas): void
+    public function getFrame(): RectD
     {
+        if ($this->getShapesCount() == 0) {
+            return new RectD(new Point(0, 0), 0, 0);
+        }
+        $minX = PHP_INT_MAX;
+        $minY = PHP_INT_MAX;
+        $maxX = PHP_INT_MIN;
+        $maxY = PHP_INT_MIN;
+        foreach ($this->shapes as $position => $shape) {
+            $oldFrameShape = $this->shapes[$position]->getFrame();
+            $minX = min($minX, $oldFrameShape->getLeftTopPoint()->getX());
+            $maxX = max($maxX, $oldFrameShape->getLeftTopPoint()->getX() + $oldFrameShape->getWidth());
+            $minY = min($minY, $oldFrameShape->getLeftTopPoint()->getY());
+            $maxY = max($maxY, $oldFrameShape->getLeftTopPoint()->getY() + $oldFrameShape->getHeight());
+        }
+
+        return new RectD(new Point($minX, $minY), $maxX - $minX, $maxY - $minY);
+    }
+
+    public function setFrame(RectD $frame): void
+    {
+        foreach ($this->shapes as $position => $shape) {
+            $newShapeFrame = $this->getNewShapeFrame($shape, $frame);
+            $shape->setFrame($newShapeFrame);
+        }
+    }
+
+    public function getOutlineStyle(): OutlineStyleInterface
+    {
+        return $this->groupOutlineStyle;
+    }
+
+    public function getFillStyle(): StyleInterface
+    {
+        return $this->groupFillStyle;
+    }
+
+    public function getGroup(): ?GroupShapeInterface
+    {
+        return $this;
+    }
+
+    public function draw(CanvasInterface $canvas): void
+    {
+        $canvas->setOutlineThickness($this->getOutlineStyle()->getOutlineThickness());
+        $canvas->setOutlineColor($this->getOutlineStyle()->getColor());
+        $canvas->setFillColor($this->getFillStyle()->getColor());
         foreach ($this->shapes as $shape) {
             $shape->draw($canvas);
         }
     }
 
-    public function getLineThickness(): float
+    private function getNewShapeFrame(ShapeInterface $shape, RectD $frame): RectD
     {
-        return $this->lineThickness;
-    }
+        $oldGroupFrame = $this->getFrame();
+        $oldGroupFrameLeftTop = $oldGroupFrame->getLeftTopPoint();
+        $leftTop = $frame->getLeftTopPoint();
+        $oldShapeFrame = $shape->getFrame();
+        $oldShapeFrameLeftTop = $oldShapeFrame->getLeftTopPoint();
+        $newX = $leftTop->getX() + ($oldShapeFrameLeftTop->getX() - $oldGroupFrameLeftTop->getX()) * ($frame->getWidth() / $oldGroupFrame->getWidth());
+        $newY = $leftTop->getY() + ($oldShapeFrameLeftTop->getY() - $oldGroupFrameLeftTop->getY()) * ($frame->getHeight() / $oldGroupFrame->getHeight());
+        $newLeftTop = new Point($newX, $newY);
+        $newWidth = $oldShapeFrame->getWidth() * $frame->getWidth() / $oldGroupFrame->getWidth();
+        $newHeight = $oldShapeFrame->getHeight() * $frame->getHeight() / $oldGroupFrame->getHeight();
 
-    public function setLineThickness(float $lineThickness): void
-    {
-        $this->lineThickness = $lineThickness;
-        foreach ($this->shapes as $shape) {
-            $shape->setLineThickness($this->lineThickness);
-        }
-    }
-
-    public function setFillStyle(Style $fillStyle): void
-    {
-        $this->fillStyle = $fillStyle;
-        foreach ($this->shapes as $shape) {
-            $shape->setFillStyle($this->fillStyle);
-        }
+        return new RectD($newLeftTop, $newWidth, $newHeight);
     }
 }

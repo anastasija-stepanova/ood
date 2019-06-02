@@ -3,12 +3,10 @@
 interface CanvasInterface
 {
     public function setFillColor(RGBAColor $color): void;
-    public function setLineColor(RGBAColor $color): void;
-    public function setLineThickness(float $thickness): void;
-    public function beginFill(RGBAColor $color): void;
-    public function endFill(): void;
-    public function moveTo(float $x, float $y): void;
-    public function lineTo(float $x, float $y): void;
-    public function drawEllipse(float $left, float $top, float $width, float $height): void;
-    public function fillPolygon(array $xPoints, array $yPoints, int $numberPoints): void;
+    public function setOutlineColor(RGBAColor $color): void;
+    public function setSize(float $width, float $height): void;
+    public function setOutlineThickness(float $thickness): void;
+    public function drawEllipse(Point $center, float $horizontalRadius, float $verticalRadius): void;
+    public function drawLine(Point $from, Point $to): void;
+    public function drawPolygon(array $points): void;
 }

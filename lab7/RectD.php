@@ -2,67 +2,38 @@
 
 class RectD
 {
-    /** @var float */
-    public $left;
-    /** @var float */
-    public $top;
+
+    /** @var Point */
+    private $leftTop;
     /** @var float */
     public $width;
     /** @var float */
     public $height;
 
-    /**
-     * RectD constructor.
-     * @param $left
-     * @param $top
-     * @param $width
-     * @param $height
-     */
-    public function __construct($left, $top, $width, $height)
+    public function __construct(Point $leftTop, float $width, float $height)
     {
-        $this->left = $left;
-        $this->top = $top;
+        $this->leftTop = clone $leftTop;
         $this->width = $width;
         $this->height = $height;
     }
 
-    public function getTop()
+    public function getLeftTopPoint(): Point
     {
-        return $this->top;
+        return clone $this->leftTop;
     }
 
-    public function setTop(float $top): void
+    public function getWidth(): float
     {
-        $this->top = $top;
+        return round($this->width, 2);
     }
 
-    public function getLeft()
+    public function getHeight(): float
     {
-        return $this->left;
+        return round($this->height, 2);
     }
 
-    public function setLeft(float $left): void
+    public function __clone()
     {
-        $this->left = $left;
-    }
-
-    public function getHeight()
-    {
-        return $this->height;
-    }
-
-    public function setHeight(float $height): void
-    {
-        $this->height = $height;
-    }
-
-    public function getWidth()
-    {
-        return $this->width;
-    }
-
-    public function setWidth(float $width): void
-    {
-        $this->width = $width;
+        return new RectD($this->leftTop, $this->width, $this->height);
     }
 }
