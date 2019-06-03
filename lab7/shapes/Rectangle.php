@@ -14,7 +14,7 @@ class Rectangle extends Shape
         $this->leftTop = $leftTop;
         $this->width = $width;
         $this->height = $height;
-        $defaultColor = new RGBAColor(0, 0, 0, 0);
+        $defaultColor = new RGBAColor(0, 0, 0);
         $defaultThickness = 2;
         $defaultOutlineStyle = new OutlineStyle($defaultColor, $defaultThickness);
         $defaultFillStyle = new FillStyle($defaultColor);

@@ -14,7 +14,7 @@ class Triangle extends Shape
         $this->vertexA = $vertexA;
         $this->vertexB = $vertexB;
         $this->vertexC = $vertexC;
-        $defaultColor = new RGBAColor(0, 0, 0, 0);
+        $defaultColor = new RGBAColor(0, 0, 0);
         $defaultThickness = 2;
         $defaultOutlineStyle = new OutlineStyle($defaultColor, $defaultThickness);
         $defaultFillStyle = new FillStyle($defaultColor);

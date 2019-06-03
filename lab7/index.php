@@ -21,9 +21,9 @@ function createSlide(): SlideInterface
 function createHome(): ShapeInterface
 {
     $roof = new Triangle(new Point(300, 50), new Point(150, 130), new Point(450, 130));
-    $roof->getFillStyle()->setColor(new RGBAColor(75, 105, 51, 0));
+    $roof->getFillStyle()->setColor(new RGBAColor(75, 105, 51));
     $roof->getOutlineStyle()->setOutlineThickness(5);
-    $roof->getOutlineStyle()->setColor(new RGBAColor(150, 100, 10, 0));
+    $roof->getOutlineStyle()->setColor(new RGBAColor(150, 100, 10));
     $base = new Rectangle(new Point(175, 135), 250, 200);
     $home = new GroupShape();
     $home->insertShape($roof);

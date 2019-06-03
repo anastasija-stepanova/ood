@@ -2,55 +2,54 @@
 
 class RGBAColor
 {
-    private $r;
-    private $g;
-    private $b;
-    private $a;
+    public const MIN_VALUE = 0;
+    public const MAX_VALUE = 255;
+    private const MESSAGE_FOR_OUT_OF_RANGE_EXCEPTION = 'The %s shade is out of range';
+    /** @var int */
+    private $red;
+    /** @var int */
+    private $green;
+    /** @var int */
+    private $blue;
 
-    /**
-     * RGBAColor constructor.
-     * @param $r
-     * @param $g
-     * @param $b
-     * @param $a
-     */
-    public function __construct($r, $g, $b, $a)
+    public function __construct(int $red, int $green, int $blue)
     {
-        $this->r = $r;
-        $this->g = $g;
-        $this->b = $b;
-        $this->a = $a;
+        if (!$this->isValidShade($red)) {
+            throw new OutOfRangeException(sprintf(self::MESSAGE_FOR_OUT_OF_RANGE_EXCEPTION, 'red'));
+        }
+        $this->red = $red;
+        if (!$this->isValidShade($green)) {
+            throw new OutOfRangeException(sprintf(self::MESSAGE_FOR_OUT_OF_RANGE_EXCEPTION, 'green'));
+        }
+        $this->green = $green;
+        if (!$this->isValidShade($blue)) {
+            throw new OutOfRangeException(sprintf(self::MESSAGE_FOR_OUT_OF_RANGE_EXCEPTION, 'blue'));
+        }
+        $this->blue = $blue;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getR()
+    public function getRedShade(): int
     {
-        return $this->r;
+        return $this->red;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getG()
+    public function getGreenShade(): int
     {
-        return $this->g;
+        return $this->green;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getB()
+    public function getBlueShade(): int
     {
-        return $this->b;
+        return $this->blue;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getA()
+    public function __clone()
     {
-        return $this->a;
+        return new RGBAColor($this->red, $this->green, $this->blue);
+    }
+
+    private function isValidShade(int $shade): bool
+    {
+        return $shade >= self::MIN_VALUE && $shade <= self::MAX_VALUE;
     }
 }

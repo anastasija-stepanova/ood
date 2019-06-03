@@ -6,10 +6,9 @@ class Logout extends Functions
     private $menu;
     const EXIT = "Exit";
 
-    public function action()
+    public function action($argv, $argc): void
     {
-        $args = [];
-        if (count($args) != 1) {
+        if (count($argc) != 1) {
             $this->showErrorForCommand(self::EXIT);
 
             return;

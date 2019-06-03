@@ -6,7 +6,7 @@ class Functions
     private $menu;
     const END_POSITION = "end";
 
-    public function action()
+    public function action($argv, $argc)
     {
 
     }

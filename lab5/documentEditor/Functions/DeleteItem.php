@@ -6,16 +6,15 @@ class DeleteItem extends Functions
     private $document;
     const DELETE_ITEM = "di";
 
-    public function action()
+    public function action($argv, $argc)
     {
-        $args = [];
-        if (count($args) != 2) {
+        if (count($argc) != 2) {
             $this->showErrorForCommand(self::DELETE_ITEM);
 
             return;
         }
 
-        $position = $this->getPosition($args[1]);
+        $position = $this->getPosition($argv[1]);
         $this->document->deleteItem($position);
     }
 }

@@ -29,6 +29,9 @@ class Commander
         $ii = new InsertImage();
         $sT = new SetTitle();
         $l = new Logout();
+        var_dump($iP->action());
+        $this->menu->addItem("1", "2", $iP->action());
+        $this->menu->showInstructions();
 //        $this->menu->addItem(self::INSERT_PARAGRAPH,
 //            self::INSERT_PARAGRAPH . " <position> <text>. Position can be \"end\"", $iP->action());
 //        $this->menu->addItem(self::INSERT_IMAGE,
@@ -44,7 +47,7 @@ class Commander
 //        $this->menu->addItem(self::UNDO, self::UNDO . ". " . self::WITHOUT_PARAMETERS, $this->undo());
 //        $this->menu->addItem(self::REDO, self::REDO . ". " . self::WITHOUT_PARAMETERS, $this->redo());
 //        $this->menu->addItem(self::SAVE, self::SAVE . " <path to save>", $this->save());
-        $this->menu->addItem(self::EXIT, self::EXIT . ". " . self::WITHOUT_PARAMETERS, $l->action());
+//        $this->menu->addItem(self::EXIT, self::EXIT . ". " . self::WITHOUT_PARAMETERS, $l->action());
     }
 
     public function start(): void

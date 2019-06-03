@@ -6,17 +6,16 @@ class InsertImage extends Functions
     private $document;
     const INSERT_IMAGE = "ii";
 
-    public function action()
+    public function action($argv, $argc)
     {
-        $args = [];
-        if (count($args) != 5) {
+        if (count($argc) != 5) {
             $this->showErrorForCommand(self::INSERT_IMAGE);
 
             return;
         }
-        $position = $this->getPosition($args[1]);
-        $width = $args[2];
-        $height = $args[3];
-        $this->document->insertImage($args[4], $width, $height, $position);
+        $position = $this->getPosition($argv[1]);
+        $width = $argv[2];
+        $height = $argv[3];
+        $this->document->insertImage($argv[4], $width, $height, $position);
     }
 }

@@ -6,10 +6,9 @@ class Redo extends Functions
     private $document;
     const REDO = "Redo";
 
-    public function action()
+    public function action($argv, $argc)
     {
-        $args = [];
-        if (count($args) != 1) {
+        if (count($argc) != 1) {
             $this->showErrorForCommand(self::REDO);
 
             return;

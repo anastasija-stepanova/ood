@@ -89,8 +89,7 @@ class CanvasSvg implements CanvasInterface
         $outlineColor = sprintf('rgb(%d, %d, %d)', $this->outlineColor->getRedShade(),
             $this->outlineColor->getGreenShade(), $this->outlineColor->getBlueShade());
 
-        return "
-<ellipse
+        return "<ellipse
   cx=\"{$centerX}\"
   cy=\"{$centerY}\"
   rx=\"{$horizontalRadius}\"
@@ -108,8 +107,7 @@ class CanvasSvg implements CanvasInterface
         $outlineColor = sprintf('rgb(%d, %d, %d)', $this->outlineColor->getRedShade(),
             $this->outlineColor->getGreenShade(), $this->outlineColor->getBlueShade());
 
-        return "
-<line 
+        return "<line 
   x1=\"{$fromX}\"
   x2=\"{$toX}\"
   y1=\"{$fromY}\"
@@ -139,8 +137,6 @@ class CanvasSvg implements CanvasInterface
         $outlineColor = sprintf('rgb(%d, %d, %d)', $this->outlineColor->getRedShade(),
             $this->outlineColor->getGreenShade(), $this->outlineColor->getBlueShade());
 
-        return "
-<polygon points='{$pointsStr}' fill='{$fillColor}' stroke='$outlineColor' stroke-width='{$this->thickness}' />
-";
+        return "<polygon points='{$pointsStr}' fill='{$fillColor}' stroke='$outlineColor' stroke-width='{$this->thickness}' />";
     }
 }
