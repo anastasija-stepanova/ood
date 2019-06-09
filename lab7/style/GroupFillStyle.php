@@ -2,10 +2,10 @@
 
 class GroupFillStyle implements StyleInterface
 {
-    /** @var GroupFillStyleEnumerator */
+    /** @var StyleEnumeratorInterface */
     private $enumerator;
 
-    public function __construct(GroupFillStyleEnumerator $enumerator)
+    public function __construct(StyleEnumeratorInterface $enumerator)
     {
         $this->enumerator = $enumerator;
     }

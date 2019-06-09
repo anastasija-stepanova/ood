@@ -16,6 +16,7 @@ require_once(__DIR__ . "/RectD.php");
 require_once(__DIR__ . "/style/RGBAColor.php");
 require_once(__DIR__ . "/slide/SlideInterface.php");
 require_once(__DIR__ . "/slide/Slide.php");
+require_once(__DIR__ . "/style/StyleEnumeratorInterface.php");
 require_once(__DIR__ . "/style/StyleInterface.php");
 require_once(__DIR__ . "/style/Style.php");
 require_once(__DIR__ . "/style/FillStyle.php");

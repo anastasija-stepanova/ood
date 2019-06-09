@@ -1,6 +1,6 @@
 <?php
 
-class GroupOutlineStyleEnumerator
+class GroupOutlineStyleEnumerator implements StyleEnumeratorInterface
 {
     /** @var ShapeInterface[] */
     private $shapes;

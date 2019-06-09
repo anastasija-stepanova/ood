@@ -49,12 +49,13 @@ class GroupShape implements GroupShapeInterface
             throw new \OutOfRangeException('It\'s impossible to remove shape');
         }
         unset($this->shapes[$index]);
+        array_values($this->shapes);
     }
 
     public function getFrame(): RectD
     {
         if ($this->getShapesCount() == 0) {
-            return new RectD(new Point(0, 0), 0, 0);
+            return new RectD(new Point(null, null), null, null);
         }
         $minX = PHP_INT_MAX;
         $minY = PHP_INT_MAX;

@@ -1,6 +1,10 @@
 <?php
 
-require_once("Include/inc.php");
+require_once 'vendor/autoload.php';
 
-$commander = new Commander();
-$commander->start();
+define('ROOT_DIR', __DIR__);
+
+use App\App;
+
+$app = new App();
+$app->run();

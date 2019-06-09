@@ -3,10 +3,10 @@
 class GroupOutlineStyle implements OutlineStyleInterface
 {
     const DEFAULT_THICKNESS = 1;
-    /** @var GroupOutlineStyleEnumerator */
+    /** @var StyleEnumeratorInterface */
     private $enumerator;
 
-    public function __construct(GroupOutlineStyleEnumerator $enumerator)
+    public function __construct(StyleEnumeratorInterface $enumerator)
     {
         $this->enumerator = $enumerator;
     }
