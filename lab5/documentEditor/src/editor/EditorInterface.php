@@ -12,4 +12,5 @@ interface EditorInterface
     public function canRedo(): bool;
     public function redo(): void;
     public function save(string $path): void;
+    public function list(): void;
 }

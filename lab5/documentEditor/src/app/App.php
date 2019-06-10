@@ -20,6 +20,7 @@ class App
     const REDO = 'redo';
     const SAVE = 'save';
     const LIST = 'list';
+    const HELP = 'help';
 
     private $isExit = false;
 
@@ -67,7 +68,8 @@ class App
         $menu->addItem(App::UNDO, '', $this->getUndoCallback($editor));
         $menu->addItem(App::REDO, '', $this->getRedoCallback($editor));
         $menu->addItem(App::SAVE, '', $this->getSaveCallback($editor));
-        $menu->addItem(App::LIST, '', $this->getShowCommandsCallback($menu));
+        $menu->addItem(App::HELP, '', $this->getShowCommandsCallback($menu));
+        $menu->addItem(App::LIST, '', $this->getListCallback($editor));
     }
 
     private function getExitCommandCallback(): callable
@@ -137,6 +139,18 @@ class App
             }
 
             $editor->save($commandArgs[1]);
+        };
+    }
+
+    private function getListCallback(EditorInterface $editor): callable
+    {
+        return function (array $commandArgs) use ($editor)
+        {
+            if (count($commandArgs) != 2) {
+                return;
+            }
+
+            $editor->list();
         };
     }
 

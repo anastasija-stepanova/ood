@@ -6,6 +6,7 @@ use Command\History\CommandHistory;
 use Command\History\Exception\CommandHistoryException;
 use Command\InsertImageCommand;
 use Command\InsertParagraphCommand;
+use Command\ListCommand;
 use Command\SaveCommand;
 use Command\SetTitleCommand;
 use Document\DocumentInterface;
@@ -93,6 +94,13 @@ class Editor implements EditorInterface
             throw new Exception('Directory isn\'t exists.');
         }
         $command = new SaveCommand($this->document, $this->imageController, $path);
+        $command->execute();
+        $this->commandHistory->addCommand($command);
+    }
+
+    public function list(): void
+    {
+        $command = new ListCommand($this->document, $this->imageController);
         $command->execute();
         $this->commandHistory->addCommand($command);
     }
