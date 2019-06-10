@@ -33,8 +33,6 @@ class App
 
         while (!$this->isExit) {
             $commandStr = readline('> ');
-            echo 'fmfmfmfm';
-            var_dump($commandStr);
             $this->executeCommand($menu, $commandStr);
         }
     }

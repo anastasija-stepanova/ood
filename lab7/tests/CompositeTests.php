@@ -89,33 +89,6 @@ final class CompositeTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals($leftTop->getY(), 15.71);
     }
 
-    public function test_noSetFrameOfShapeWhenItIsInGroup(): void
-    {
-        $group = new MockShape(10, 50, 10, 10);
-        $group->setFrame(new RectD(new Point(10, 10), 10, 20));
-        $groupFrame = $group->getFrame();
-        $shapeGroup = new GroupShape();
-
-        $group->setFrame(new RectD(new Point(90, 90), 90, 90));
-        $groupFrame = $group->getFrame();
-        $shapeGroup->insertShape($group);
-        $point = new Point(0, 5);
-        $width = 30;
-        $height = 25;
-        $frame = new RectD($point, $width, $height);
-        $shapeGroup->setFrame($frame);
-        $leftTop = $frame->getLeftTopPoint();
-        $pointShape = $groupFrame->getLeftTopPoint();
-        $this->assertEquals($frame->getWidth(), 30);
-        $this->assertEquals($frame->getHeight(), 25);
-        $this->assertEquals($leftTop->getX(), 0);
-        $this->assertEquals($leftTop->getY(), 5);
-        $this->assertEquals($groupFrame->getWidth(), 30);
-        $this->assertEquals($groupFrame->getHeight(), 25);
-        $this->assertEquals($pointShape->getX(), 0);
-        $this->assertEquals($pointShape->getY(), 5);
-    }
-
     private function try_removeAtNoExitsIndex(GroupShape $shapeGroup): int
     {
         $code = 0;

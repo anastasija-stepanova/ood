@@ -30,7 +30,6 @@ class SaveCommand implements CommandInterface
         $exporter = new HtmlExporter();
         $htmlDocument = $exporter->export($this->document);
 
-        var_dump($filePath);
         file_put_contents($filePath, $htmlDocument);
         $this->imageController->deleteImageWhichMarkAsDeleted();
         $this->imageController->copyFilesToDirectory($this->path . '/' . self::IMAGE_DIRECTORY);
