@@ -1,0 +1,11 @@
+C:\Users\Anastasia\source\repos\lab_9\lab_9\obj\Debug\lab_9.csprojAssemblyReference.cache
+C:\Users\Anastasia\source\repos\lab_9\lab_9\obj\Debug\lab_9.Properties.Resources.resources
+C:\Users\Anastasia\source\repos\lab_9\lab_9\obj\Debug\lab_9.View.AddingHarmonicView.resources
+C:\Users\Anastasia\source\repos\lab_9\lab_9\obj\Debug\lab_9.View.Menu.resources
+C:\Users\Anastasia\source\repos\lab_9\lab_9\obj\Debug\lab_9.csproj.GenerateResource.cache
+C:\Users\Anastasia\source\repos\lab_9\lab_9\obj\Debug\lab_9.csproj.CoreCompileInputs.cache
+C:\Users\Anastasia\source\repos\lab_9\lab_9\bin\Debug\lab_9.exe.config
+C:\Users\Anastasia\source\repos\lab_9\lab_9\bin\Debug\lab_9.exe
+C:\Users\Anastasia\source\repos\lab_9\lab_9\bin\Debug\lab_9.pdb
+C:\Users\Anastasia\source\repos\lab_9\lab_9\obj\Debug\lab_9.exe
+C:\Users\Anastasia\source\repos\lab_9\lab_9\obj\Debug\lab_9.pdb

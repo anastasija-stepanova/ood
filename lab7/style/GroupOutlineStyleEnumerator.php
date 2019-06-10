@@ -5,9 +5,9 @@ class GroupOutlineStyleEnumerator implements StyleEnumeratorInterface
     /** @var ShapeInterface[] */
     private $shapes;
 
-    public function __construct(array &$shapes)
+    public function __construct(array $shapes)
     {
-        $this->shapes = &$shapes;
+        $this->shapes = $shapes;
     }
 
     public function execute(callable $callback)
