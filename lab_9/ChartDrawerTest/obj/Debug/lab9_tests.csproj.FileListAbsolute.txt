@@ -1,0 +1,2 @@
+C:\Users\Anastasia\source\lab_9\ChartDrawerTest\obj\Debug\lab9_tests.csprojAssemblyReference.cache
+C:\Users\Anastasia\source\lab_9\ChartDrawerTest\obj\Debug\lab9_tests.csproj.CoreCompileInputs.cache

@@ -1,0 +1,10 @@
+C:\Users\Anastasia\source\lab_9\ChartDrawer\bin\Debug\ChartDrawer.exe.config
+C:\Users\Anastasia\source\lab_9\ChartDrawer\bin\Debug\ChartDrawer.exe
+C:\Users\Anastasia\source\lab_9\ChartDrawer\bin\Debug\ChartDrawer.pdb
+C:\Users\Anastasia\source\lab_9\ChartDrawer\obj\Debug\lab9.View.AddingHarmonic.AddingHarmonicsView.resources
+C:\Users\Anastasia\source\lab_9\ChartDrawer\obj\Debug\lab9.View.MainMenu.MainMenuView.resources
+C:\Users\Anastasia\source\lab_9\ChartDrawer\obj\Debug\ChartDrawer.Properties.Resources.resources
+C:\Users\Anastasia\source\lab_9\ChartDrawer\obj\Debug\Lab9.csproj.GenerateResource.cache
+C:\Users\Anastasia\source\lab_9\ChartDrawer\obj\Debug\Lab9.csproj.CoreCompileInputs.cache
+C:\Users\Anastasia\source\lab_9\ChartDrawer\obj\Debug\ChartDrawer.exe
+C:\Users\Anastasia\source\lab_9\ChartDrawer\obj\Debug\ChartDrawer.pdb

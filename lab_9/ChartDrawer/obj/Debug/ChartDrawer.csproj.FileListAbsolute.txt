@@ -1,0 +1,11 @@
+C:\Users\Anastasia\OOD\lab9\ChartDrawer\ChartDrawer\bin\Debug\ChartDrawer.exe.config
+C:\Users\Anastasia\OOD\lab9\ChartDrawer\ChartDrawer\bin\Debug\ChartDrawer.exe
+C:\Users\Anastasia\OOD\lab9\ChartDrawer\ChartDrawer\bin\Debug\ChartDrawer.pdb
+C:\Users\Anastasia\OOD\lab9\ChartDrawer\ChartDrawer\obj\Debug\ChartDrawer.csprojAssemblyReference.cache
+C:\Users\Anastasia\OOD\lab9\ChartDrawer\ChartDrawer\obj\Debug\ChartDrawer.View.AddingHarmonic.AddingHarmonicsView.resources
+C:\Users\Anastasia\OOD\lab9\ChartDrawer\ChartDrawer\obj\Debug\ChartDrawer.View.MainMenu.MainMenuView.resources
+C:\Users\Anastasia\OOD\lab9\ChartDrawer\ChartDrawer\obj\Debug\ChartDrawer.Properties.Resources.resources
+C:\Users\Anastasia\OOD\lab9\ChartDrawer\ChartDrawer\obj\Debug\ChartDrawer.csproj.GenerateResource.cache
+C:\Users\Anastasia\OOD\lab9\ChartDrawer\ChartDrawer\obj\Debug\ChartDrawer.csproj.CoreCompileInputs.cache
+C:\Users\Anastasia\OOD\lab9\ChartDrawer\ChartDrawer\obj\Debug\ChartDrawer.exe
+C:\Users\Anastasia\OOD\lab9\ChartDrawer\ChartDrawer\obj\Debug\ChartDrawer.pdb
